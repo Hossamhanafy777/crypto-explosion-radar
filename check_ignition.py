@@ -106,7 +106,7 @@ def send_telegram_alert(message: str) -> bool:
     try:
         resp = requests.post(
             f"https://api.telegram.org/bot{token}/sendMessage",
-            json={"chat_id": chat_id, "text": message, "parse_mode": "Markdown"},
+            json={"chat_id": chat_id, "text": message},
             timeout=REQUEST_TIMEOUT,
         )
         resp.raise_for_status()
@@ -157,11 +157,11 @@ def run() -> None:
 
         pct_above = (live_price - ceiling) / ceiling * 100
         message = (
-            f"*Ignition Alert: {symbol}*\n"
+            f"Ignition Alert: {symbol}\n"
             f"Broke above its 30-day range ceiling with volume confirmation.\n\n"
-            f"Ceiling: `{ceiling:.8f}`\n"
-            f"Live price: `{live_price:.8f}` (+{pct_above:.1f}% above ceiling)\n"
-            f"24h volume: `{live_quote_volume_24h:,.0f}` USDT "
+            f"Ceiling: {ceiling:.8f}\n"
+            f"Live price: {live_price:.8f} (+{pct_above:.1f}% above ceiling)\n"
+            f"24h volume: {live_quote_volume_24h:,.0f} USDT "
             f"({live_quote_volume_24h/avg_volume:.1f}x the 20-day average)\n\n"
             f"Reminder: this narrows the field, it is not a buy signal by itself. "
             f"Verify manually before acting."
