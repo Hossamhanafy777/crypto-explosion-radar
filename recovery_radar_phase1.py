@@ -11,17 +11,37 @@ the numeric quality-filter thresholds first, see TODO markers below):
        - the 2025-10-10 candle itself is NEVER downloaded/stored (per spec:
          ignore the crash day entirely, including its wicks)
   3. Compute, per symbol:
+       - post_crash_low_alltime = the lowest daily Low reached at ANY point
+         from 2025-10-11 to now (a running all-time-low, moves down only)
+       - ever_touched_5x = walking day by day from 2025-10-11 forward, was
+         that day's High ever >= 5x the running low established up to and
+         including that day? Checked over the WHOLE history, not just now.
+         A coin that touched 5x even once (wick or close, doesn't matter)
+         and fell back still counts as "touched" - permanent, one-way flag.
+       - current_multiple_from_low = current_price / post_crash_low_alltime
+         (also checked live against the 5x threshold, in case today's
+         still-open candle would trip it before its High is ever stored)
        - pre_crash_normal_level = average close of 2025-10-08 and 2025-10-09
-         (the OFFICIAL figure, per your decision)
+         (the OFFICIAL figure, per your decision) - NO LONGER a gate, now a
+         SCORING INPUT: pre_crash_normal_level / current_price estimates
+         theoretical upside if the coin ever reclaimed its old level
        - sept_reference_avg = average daily close over the full Sep-2025
-         window, stored ONLY as a sanity check, never used in the score
+         window, stored ONLY as a sanity check on pre_crash_normal_level
        - divergence_flag = True if the two disagree by more than 15%
-         (this does not exclude a coin - it just gets surfaced so you see it
-         instead of it silently skewing a multiple)
-       - post_crash_low = the 2025-10-11 daily Low
-       - current_price = latest available price (ticker, not a stale close)
-       - recovery_multiple = pre_crash_normal_level / current_price
-  4. Keep only symbols with recovery_multiple >= 5.0.
+         (surfaced, not excluding - so a distorted 2-day reference doesn't
+         silently skew the theoretical-upside score)
+  4. NO FILTERING/GATING happens in this phase. Every currently-listed USDT
+     symbol (the full Binance Spot universe, not just visibly-crashed coins)
+     gets a row in recovery_snapshot with all of the above computed and
+     stored. ever_touched_5x is stored as an INFORMATIONAL flag only - it is
+     NOT used to exclude anything here. Strategy/scoring/filtering is a
+     separate layer applied on top of this data later, and can be changed
+     freely without re-collecting anything.
+  5. ath_price / ath_date = the absolute all-time-high ever recorded for the
+     symbol on Binance (lifetime, back to its listing date if needed),
+     combined from a one-time historical scan (pre-Sept-2025, price+date
+     only - old candles themselves are NOT stored) and the max High already
+     present in candles_daily (Sept 2025 onward, which we do store in full).
   5. Everything lands in one SQLite file = the single source of truth.
      On every run, the ingester reads what's already stored and only
      fetches what's missing (new closed candles, or symbols never seen).
@@ -66,7 +86,8 @@ PRE_CRASH_END = "2025-10-09"            # inclusive, day before crash
 POST_CRASH_START = "2025-10-11"         # inclusive, day after crash
 NORMAL_LEVEL_DAYS = ["2025-10-08", "2025-10-09"]  # official pre-crash reference
 
-RECOVERY_MULTIPLE_MIN = 5.0
+EXPLOSION_MULTIPLE_THRESHOLD = 5.0      # GATE: exclude forever once High >= 5x the running post-crash low
+UPSIDE_SCORE_REFERENCE = 5.0            # informational only, not a gate (kept for reference/back-compat)
 SANITY_DIVERGENCE_PCT = 0.15            # flag if Oct8-9 avg vs Sept avg differ >15%
 
 REQUEST_TIMEOUT = 15
@@ -86,7 +107,10 @@ CREATE TABLE IF NOT EXISTS universe (
     status TEXT NOT NULL,
     first_seen_utc TEXT NOT NULL,
     existed_pre_crash INTEGER,          -- NULL until we check, else 0/1
-    last_checked_utc TEXT
+    last_checked_utc TEXT,
+    ath_pre_sept_price REAL,            -- ATH found in full lifetime history UP TO 2025-09-01, fetched once
+    ath_pre_sept_date TEXT,
+    ath_pre_sept_fetched INTEGER DEFAULT 0   -- 1 once the one-time lifetime scan is done (never re-fetched)
 );
 
 CREATE TABLE IF NOT EXISTS candles_daily (
@@ -111,9 +135,17 @@ CREATE TABLE IF NOT EXISTS recovery_snapshot (
     sept_reference_avg REAL,
     divergence_flag INTEGER,
     divergence_pct REAL,
-    post_crash_low REAL,
+    post_crash_low REAL,                -- kept for back-compat (2025-10-11 Low only)
     current_price REAL,
-    recovery_multiple REAL,
+    recovery_multiple REAL,             -- kept for back-compat = pre_crash_normal_level / current_price
+    post_crash_low_alltime REAL,        -- NEW: lowest Low from 2025-10-11 to now, running
+    low_reached_date TEXT,              -- NEW: which day set that low
+    ever_touched_5x INTEGER,            -- NEW: 1 = permanently excluded, already moved 5x off its low
+    touched_5x_date TEXT,               -- NEW: which day first tripped it (NULL if never)
+    current_multiple_from_low REAL,     -- NEW: current_price / post_crash_low_alltime
+    theoretical_upside REAL,            -- NEW: pre_crash_normal_level / current_price (scoring input, not gate)
+    ath_price REAL,                     -- NEW: absolute all-time high on Binance (pre-Sept-2025 scan combined with stored candles)
+    ath_date TEXT,                      -- NEW: date that ATH was set
     data_status TEXT NOT NULL,          -- VERIFIED / PENDING / UNKNOWN
     last_updated_utc TEXT NOT NULL
 );
@@ -129,10 +161,43 @@ CREATE TABLE IF NOT EXISTS run_history (
 """
 
 
+_NEW_SNAPSHOT_COLUMNS = [
+    ("post_crash_low_alltime", "REAL"),
+    ("low_reached_date", "TEXT"),
+    ("ever_touched_5x", "INTEGER"),
+    ("touched_5x_date", "TEXT"),
+    ("current_multiple_from_low", "REAL"),
+    ("theoretical_upside", "REAL"),
+    ("ath_price", "REAL"),
+    ("ath_date", "TEXT"),
+]
+
+_NEW_UNIVERSE_COLUMNS = [
+    ("ath_pre_sept_price", "REAL"),
+    ("ath_pre_sept_date", "TEXT"),
+    ("ath_pre_sept_fetched", "INTEGER DEFAULT 0"),
+]
+
+
+def _migrate(conn: sqlite3.Connection) -> None:
+    """Add any new columns to an existing DB file committed under an older schema."""
+    existing = {row[1] for row in conn.execute("PRAGMA table_info(recovery_snapshot)").fetchall()}
+    for col_name, col_type in _NEW_SNAPSHOT_COLUMNS:
+        if col_name not in existing:
+            conn.execute(f"ALTER TABLE recovery_snapshot ADD COLUMN {col_name} {col_type}")
+
+    existing_universe = {row[1] for row in conn.execute("PRAGMA table_info(universe)").fetchall()}
+    for col_name, col_type in _NEW_UNIVERSE_COLUMNS:
+        if col_name not in existing_universe:
+            conn.execute(f"ALTER TABLE universe ADD COLUMN {col_name} {col_type}")
+    conn.commit()
+
+
 def get_conn() -> sqlite3.Connection:
     conn = sqlite3.connect(DB_PATH)
     conn.execute("PRAGMA journal_mode=WAL;")
     conn.executescript(SCHEMA)
+    _migrate(conn)
     return conn
 
 
@@ -204,6 +269,65 @@ def fetch_current_price(symbol: str) -> Optional[float]:
     except Exception as e:
         print(f"[warn] no current price for {symbol}: {e}", file=sys.stderr)
         return None
+
+
+def fetch_lifetime_ath_pre_sept(symbol: str) -> tuple[Optional[float], Optional[str]]:
+    """
+    One-time scan: paginate the symbol's FULL daily history from listing up to
+    (but not including) 2025-09-01, tracking the max High and its date in
+    memory only - individual candles from this scan are never written to
+    candles_daily (per your decision: store the ATH scalar, not the old bars).
+    """
+    end_ms = day_to_ms(PRE_CRASH_START)  # exclusive upper bound
+    cursor = 0  # startTime=0 lets Binance return from the symbol's actual listing date
+    ath_price: Optional[float] = None
+    ath_date: Optional[str] = None
+
+    while True:
+        params = {
+            "symbol": symbol,
+            "interval": "1d",
+            "startTime": cursor,
+            "endTime": end_ms,
+            "limit": KLINES_LIMIT,
+        }
+        rows = _get("/api/v3/klines", params)
+        time.sleep(RATE_LIMIT_SLEEP)
+        if not rows:
+            break
+        for r in rows:
+            high = float(r[2])
+            if ath_price is None or high > ath_price:
+                ath_price = high
+                ath_date = utc_day_str(r[0])
+        last_open = rows[-1][0]
+        next_cursor = last_open + 24 * 60 * 60 * 1000
+        if next_cursor <= cursor or next_cursor >= end_ms or len(rows) < KLINES_LIMIT:
+            break
+        cursor = next_cursor
+
+    return ath_price, ath_date
+
+
+def ensure_ath(conn: sqlite3.Connection, symbol: str) -> None:
+    """Fetch the one-time lifetime-pre-Sept ATH for a symbol if not already done."""
+    cur = conn.execute(
+        "SELECT ath_pre_sept_fetched FROM universe WHERE symbol=?", (symbol,)
+    )
+    row = cur.fetchone()
+    if row and row[0]:
+        return  # already fetched once, never re-fetch (per spec: verified history isn't re-downloaded)
+    try:
+        ath_price, ath_date = fetch_lifetime_ath_pre_sept(symbol)
+    except Exception as e:
+        print(f"[warn] ATH scan failed for {symbol}: {e}", file=sys.stderr)
+        return
+    conn.execute(
+        """UPDATE universe SET ath_pre_sept_price=?, ath_pre_sept_date=?, ath_pre_sept_fetched=1
+           WHERE symbol=?""",
+        (ath_price, ath_date, symbol),
+    )
+    conn.commit()
 
 
 # ----------------------------------------------------------------------------
@@ -295,10 +419,97 @@ class RecoveryResult:
     sept_reference_avg: Optional[float]
     divergence_flag: bool
     divergence_pct: Optional[float]
-    post_crash_low: Optional[float]
+    post_crash_low: Optional[float]              # back-compat: 2025-10-11 Low only
     current_price: Optional[float]
-    recovery_multiple: Optional[float]
+    recovery_multiple: Optional[float]            # back-compat: old formula
+    post_crash_low_alltime: Optional[float]
+    low_reached_date: Optional[str]
+    ever_touched_5x: Optional[bool]
+    touched_5x_date: Optional[str]
+    current_multiple_from_low: Optional[float]
+    theoretical_upside: Optional[float]
+    ath_price: Optional[float]
+    ath_date: Optional[str]
     data_status: str
+
+
+def compute_low_and_explosion(
+    conn: sqlite3.Connection, symbol: str, current_price: Optional[float]
+) -> tuple[Optional[float], Optional[str], bool, Optional[str], Optional[float]]:
+    """
+    Walk the full post-crash daily history in chronological order, tracking a
+    running all-time-low. On each day, check whether that day's High ever
+    reached >= EXPLOSION_MULTIPLE_THRESHOLD x the running low up to and
+    including that day. Once true, ever_touched_5x is permanently True
+    (a wick counts - we don't care if it closed back down).
+
+    Also checks the live current_price against the final running low, in
+    case today's still-open candle would trip the threshold before its High
+    is ever stored as a closed candle.
+    """
+    cur = conn.execute(
+        """SELECT open_time_utc, high, low FROM candles_daily
+           WHERE symbol=? AND open_time_utc >= ?
+           ORDER BY open_time_utc ASC""",
+        (symbol, POST_CRASH_START),
+    )
+    rows = cur.fetchall()
+    if not rows:
+        return None, None, False, None, None
+
+    running_low = None
+    low_reached_date = None
+    ever_touched_5x = False
+    touched_5x_date = None
+
+    for day, high, low in rows:
+        if running_low is None or low < running_low:
+            running_low = low
+            low_reached_date = day
+        if not ever_touched_5x and running_low and high >= EXPLOSION_MULTIPLE_THRESHOLD * running_low:
+            ever_touched_5x = True
+            touched_5x_date = day
+
+    current_multiple_from_low = None
+    if running_low and current_price:
+        current_multiple_from_low = current_price / running_low
+        # live check: today's still-open candle might already exceed the threshold
+        if not ever_touched_5x and current_multiple_from_low >= EXPLOSION_MULTIPLE_THRESHOLD:
+            ever_touched_5x = True
+            touched_5x_date = "live (current price)"
+
+    return running_low, low_reached_date, ever_touched_5x, touched_5x_date, current_multiple_from_low
+
+
+def compute_ath(conn: sqlite3.Connection, symbol: str) -> tuple[Optional[float], Optional[str]]:
+    """
+    Combine the one-time pre-Sept-2025 lifetime scan (universe table) with the
+    max High among the daily candles we already store (Sept 2025 onward,
+    which covers the crash and everything after) to get the true absolute
+    all-time-high on Binance for this symbol.
+    """
+    cur = conn.execute(
+        "SELECT ath_pre_sept_price, ath_pre_sept_date FROM universe WHERE symbol=?", (symbol,)
+    )
+    row = cur.fetchone()
+    pre_sept_price, pre_sept_date = (row[0], row[1]) if row else (None, None)
+
+    cur = conn.execute(
+        """SELECT open_time_utc, high FROM candles_daily
+           WHERE symbol=? ORDER BY high DESC LIMIT 1""",
+        (symbol,),
+    )
+    row2 = cur.fetchone()
+    stored_max_date, stored_max_high = (row2[0], row2[1]) if row2 else (None, None)
+
+    candidates = []
+    if pre_sept_price is not None:
+        candidates.append((pre_sept_price, pre_sept_date))
+    if stored_max_high is not None:
+        candidates.append((stored_max_high, stored_max_date))
+    if not candidates:
+        return None, None
+    return max(candidates, key=lambda t: t[0])
 
 
 def compute_recovery(conn: sqlite3.Connection, symbol: str) -> RecoveryResult:
@@ -311,12 +522,25 @@ def compute_recovery(conn: sqlite3.Connection, symbol: str) -> RecoveryResult:
         return row[0] if row else None
 
     closes_normal = [c for c in (get_close(d) for d in NORMAL_LEVEL_DAYS) if c is not None]
-    if len(closes_normal) < len(NORMAL_LEVEL_DAYS):
-        return RecoveryResult(symbol, None, None, False, None, None, None, None, "PENDING")
+    current_price = fetch_current_price(symbol)
+
+    post_crash_low_alltime, low_reached_date, ever_touched_5x, touched_5x_date, current_multiple_from_low = (
+        compute_low_and_explosion(conn, symbol, current_price)
+    )
+    ath_price, ath_date = compute_ath(conn, symbol)
+
+    if len(closes_normal) < len(NORMAL_LEVEL_DAYS) or post_crash_low_alltime is None:
+        # not enough history to compute the theoretical-upside score yet,
+        # but we may still have enough for the gate - report PENDING either way
+        # so a human checks it rather than silently dropping it
+        return RecoveryResult(
+            symbol, None, None, False, None, None, current_price, None,
+            post_crash_low_alltime, low_reached_date, ever_touched_5x, touched_5x_date,
+            current_multiple_from_low, None, ath_price, ath_date, "PENDING",
+        )
 
     pre_crash_normal_level = sum(closes_normal) / len(closes_normal)
 
-    # sanity-check reference: full September average close
     cur = conn.execute(
         """SELECT close FROM candles_daily
            WHERE symbol=? AND open_time_utc BETWEEN ? AND '2025-09-30'""",
@@ -331,7 +555,6 @@ def compute_recovery(conn: sqlite3.Connection, symbol: str) -> RecoveryResult:
         divergence_pct = abs(pre_crash_normal_level - sept_reference_avg) / sept_reference_avg
         divergence_flag = divergence_pct > SANITY_DIVERGENCE_PCT
 
-    post_low = get_close("2025-10-11")  # placeholder if Low not separately queried below
     cur = conn.execute(
         "SELECT low FROM candles_daily WHERE symbol=? AND open_time_utc='2025-10-11'",
         (symbol,),
@@ -339,21 +562,24 @@ def compute_recovery(conn: sqlite3.Connection, symbol: str) -> RecoveryResult:
     row = cur.fetchone()
     post_crash_low = row[0] if row else None
 
-    current_price = fetch_current_price(symbol)
-
     if current_price is None:
         return RecoveryResult(
             symbol, pre_crash_normal_level, sept_reference_avg,
             divergence_flag, divergence_pct, post_crash_low,
-            None, None, "PENDING",
+            None, None,
+            post_crash_low_alltime, low_reached_date, ever_touched_5x, touched_5x_date,
+            current_multiple_from_low, None, ath_price, ath_date, "PENDING",
         )
 
     recovery_multiple = pre_crash_normal_level / current_price if current_price > 0 else None
+    theoretical_upside = recovery_multiple  # same formula, renamed to reflect its new scoring role
 
     return RecoveryResult(
         symbol, pre_crash_normal_level, sept_reference_avg,
         divergence_flag, divergence_pct, post_crash_low,
-        current_price, recovery_multiple, "VERIFIED",
+        current_price, recovery_multiple,
+        post_crash_low_alltime, low_reached_date, ever_touched_5x, touched_5x_date,
+        current_multiple_from_low, theoretical_upside, ath_price, ath_date, "VERIFIED",
     )
 
 
@@ -363,8 +589,10 @@ def save_snapshot(conn: sqlite3.Connection, r: RecoveryResult) -> None:
         INSERT INTO recovery_snapshot
         (symbol, pre_crash_normal_level, sept_reference_avg, divergence_flag,
          divergence_pct, post_crash_low, current_price, recovery_multiple,
+         post_crash_low_alltime, low_reached_date, ever_touched_5x, touched_5x_date,
+         current_multiple_from_low, theoretical_upside, ath_price, ath_date,
          data_status, last_updated_utc)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         ON CONFLICT(symbol) DO UPDATE SET
             pre_crash_normal_level=excluded.pre_crash_normal_level,
             sept_reference_avg=excluded.sept_reference_avg,
@@ -373,14 +601,26 @@ def save_snapshot(conn: sqlite3.Connection, r: RecoveryResult) -> None:
             post_crash_low=excluded.post_crash_low,
             current_price=excluded.current_price,
             recovery_multiple=excluded.recovery_multiple,
+            post_crash_low_alltime=excluded.post_crash_low_alltime,
+            low_reached_date=excluded.low_reached_date,
+            ever_touched_5x=excluded.ever_touched_5x,
+            touched_5x_date=excluded.touched_5x_date,
+            current_multiple_from_low=excluded.current_multiple_from_low,
+            theoretical_upside=excluded.theoretical_upside,
+            ath_price=excluded.ath_price,
+            ath_date=excluded.ath_date,
             data_status=excluded.data_status,
             last_updated_utc=excluded.last_updated_utc
         """,
         (
             r.symbol, r.pre_crash_normal_level, r.sept_reference_avg,
             int(r.divergence_flag), r.divergence_pct, r.post_crash_low,
-            r.current_price, r.recovery_multiple, r.data_status,
-            datetime.now(timezone.utc).isoformat(),
+            r.current_price, r.recovery_multiple,
+            r.post_crash_low_alltime, r.low_reached_date,
+            None if r.ever_touched_5x is None else int(r.ever_touched_5x),
+            r.touched_5x_date, r.current_multiple_from_low, r.theoretical_upside,
+            r.ath_price, r.ath_date,
+            r.data_status, datetime.now(timezone.utc).isoformat(),
         ),
     )
 
@@ -423,25 +663,33 @@ def run(full_backfill: bool) -> None:
             ingest_symbol_history(conn, symbol)
         except Exception as e:
             print(f"[warn] ingestion failed for {symbol}: {e}", file=sys.stderr)
+        try:
+            ensure_ath(conn, symbol)  # one-time lifetime ATH scan, skipped if already cached
+        except Exception as e:
+            print(f"[warn] ATH ensure failed for {symbol}: {e}", file=sys.stderr)
         if i % 25 == 0:
             print(f"      ...{i}/{len(symbols)} symbols ingested")
 
-    print("[3/4] Computing recovery multiples...")
-    qualified = 0
+    print("[3/4] Computing post-crash lows, ATH and explosion-flag (informational, no filtering)...")
+    touched_count = 0
     for i, symbol in enumerate(symbols, 1):
         result = compute_recovery(conn, symbol)
         save_snapshot(conn, result)
-        if result.recovery_multiple is not None and result.recovery_multiple >= RECOVERY_MULTIPLE_MIN:
-            qualified += 1
+        if result.ever_touched_5x:
+            touched_count += 1
         if i % 25 == 0:
             conn.commit()
     conn.commit()
 
-    print(f"[4/4] Done. {qualified} symbols currently qualify at >= {RECOVERY_MULTIPLE_MIN}x recovery multiple.")
+    print(
+        f"[4/4] Done. Data stored for {len(symbols)} symbols. "
+        f"{touched_count} already touched {EXPLOSION_MULTIPLE_THRESHOLD}x off their post-crash low "
+        f"(flagged, not excluded - strategy/filtering is applied separately on top of this data)."
+    )
 
     conn.execute(
         """UPDATE run_history SET finished_utc=?, symbols_scanned=?, symbols_qualified=? WHERE run_id=?""",
-        (datetime.now(timezone.utc).isoformat(), len(symbols), qualified, run_id),
+        (datetime.now(timezone.utc).isoformat(), len(symbols), touched_count, run_id),
     )
     conn.commit()
     conn.close()
@@ -451,26 +699,36 @@ def print_qualified_report() -> None:
     conn = get_conn()
     cur = conn.execute(
         """
-        SELECT symbol, pre_crash_normal_level, current_price, recovery_multiple,
-               divergence_flag, divergence_pct, data_status
+        SELECT symbol, post_crash_low_alltime, current_price, current_multiple_from_low,
+               ath_price, ath_date, ever_touched_5x, theoretical_upside, data_status
         FROM recovery_snapshot
-        WHERE recovery_multiple >= ?
-        ORDER BY recovery_multiple DESC
+        ORDER BY symbol ASC
         """,
-        (RECOVERY_MULTIPLE_MIN,),
     )
     rows = cur.fetchall()
     conn.close()
 
     if not rows:
-        print("No qualifying symbols found (or data not yet ingested - run with --init first).")
+        print("No data found yet - run with --init first.")
         return
 
-    print(f"\n{'Symbol':<12}{'PreCrashLvl':>14}{'Current':>12}{'Multiple':>10}{'Divergence':>12}  Status")
-    print("-" * 76)
-    for symbol, pre, cur_price, mult, div_flag, div_pct, status in rows:
-        div_str = f"{div_pct*100:.1f}%" if (div_flag and div_pct is not None) else "-"
-        print(f"{symbol:<12}{pre:>14.6f}{cur_price:>12.6f}{mult:>10.2f}x{div_str:>12}  {status}")
+    print(
+        f"\n{'Symbol':<12}{'PostCrashLow':>14}{'Current':>12}"
+        f"{'FromLow':>10}{'ATH':>14}{'ATH Date':>12}{'Touched5x':>10}{'TheoUpside':>12}  Status"
+    )
+    print("-" * 110)
+    for symbol, low, cur_price, from_low, ath, ath_date, touched, upside, status in rows:
+        low_str = f"{low:.6f}" if low is not None else "-"
+        cur_str = f"{cur_price:.6f}" if cur_price is not None else "-"
+        from_low_str = f"{from_low:.2f}x" if from_low is not None else "-"
+        ath_str = f"{ath:.6f}" if ath is not None else "-"
+        ath_date_str = ath_date or "-"
+        touched_str = "YES" if touched else ("no" if touched is not None else "-")
+        upside_str = f"{upside:.2f}x" if upside is not None else "-"
+        print(
+            f"{symbol:<12}{low_str:>14}{cur_str:>12}"
+            f"{from_low_str:>10}{ath_str:>14}{ath_date_str:>12}{touched_str:>10}{upside_str:>12}  {status}"
+        )
 
 
 if __name__ == "__main__":
