@@ -57,7 +57,7 @@ import requests
 # Config
 # ----------------------------------------------------------------------------
 
-BASE_URL = "https://api.binance.com"
+BASE_URL = "https://data-api.binance.vision"
 DB_PATH = "recovery_radar.db"
 
 CRASH_DAY = "2025-10-10"                # never downloaded/stored
