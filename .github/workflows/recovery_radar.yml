@@ -1,0 +1,34 @@
+name: HH Recovery Radar
+
+on:
+  schedule:
+    - cron: '30 0 * * *'
+  workflow_dispatch:
+
+jobs:
+  run-radar:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Run Recovery Radar
+        run: python recovery_radar_phase1.py
+
+      - name: Commit updated database
+        run: |
+          git config user.name "recovery-radar-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add recovery_radar.db
+          git diff --staged --quiet || git commit -m "Daily update: $(date -u +%Y-%m-%d)"
+          git push
