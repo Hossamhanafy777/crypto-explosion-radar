@@ -20,17 +20,19 @@ METHOD - this is the part that keeps us honest:
                   date in their own history (same calendar era, same
                   measurement, but no explosion followed).
 
-  For each symbol+date, we compute:
-      pre_window_mean  = mean(metric) over the 7 days right before the date
-      baseline_mean    = mean(metric) over the 23 days before that (day -30 to -8)
-      signal_score     = pre_window_mean - baseline_mean
+  The 30 days before the event/pseudo-event are split into THREE phases,
+  not two - a flat "before vs after" comparison accidentally blends the
+  explosion's own early days into the "before" bucket:
+      baseline      = day -30 .. -15  (16 days) - normal reference behavior
+      accumulation  = day -14 .. -8   (7 days)  - the "quiet before" phase
+      ignition      = day -7  .. -1   (7 days)  - the move may already be starting
 
-  Then we compare the distribution of signal_score between EVENT and
-  CONTROL with a two-sample t-test. If EVENT's taker-buy-ratio rise is
-  NOT statistically distinguishable from CONTROL's random rise/fall, the
-  "precursor signal" is an illusion we'd have talked ourselves into from
-  a handful of after-the-fact examples. If it IS distinguishable, that's
-  real evidence, not a story.
+  For each symbol+date we compute four scores (per metric, comparing
+  accumulation-vs-baseline and ignition-vs-accumulation separately), then
+  compare EVENT vs CONTROL distributions with a two-sample t-test for each.
+  The interesting result is COMPRESSION during accumulation followed by
+  EXPANSION during ignition - a real two-phase pattern, not just "volatility
+  rises as price rises" (trivially true, proves nothing predictive).
 
 Requirements: pip install scipy
 Usage: python backtest_precursor_signals.py
@@ -53,9 +55,11 @@ except ImportError:
 
 DB_PATH = "recovery_radar.db"
 
-PRE_WINDOW_DAYS = 7          # days immediately before the event/pseudo-event
-BASELINE_DAYS = 23           # the 23 days before that (day -30 to -8)
-TOTAL_LOOKBACK_DAYS = PRE_WINDOW_DAYS + BASELINE_DAYS  # 30
+PRE_WINDOW_DAYS = 7          # kept for backward reference only
+IGNITION_DAYS = 7            # day -7 to -1: the move may already be starting here
+ACCUMULATION_DAYS = 7        # day -14 to -8: the "quiet before" window we actually care about for H2
+BASELINE_DAYS = 16           # day -30 to -15: normal/reference behavior
+TOTAL_LOOKBACK_DAYS = IGNITION_DAYS + ACCUMULATION_DAYS + BASELINE_DAYS  # 30
 BB_PERIOD = 20                # Bollinger Band lookback period
 MIN_HISTORY_NEEDED = TOTAL_LOOKBACK_DAYS + BB_PERIOD  # 50 days, so the earliest
                                                         # baseline day still has
@@ -142,34 +146,49 @@ def bollinger_width_series(closes: list[float], period: int) -> list[Optional[fl
     return out
 
 
-def compute_signal_scores(candles: list[DayRow]) -> Optional[tuple[float, float]]:
-    """Returns (taker_ratio_signal_score, bb_width_signal_score) or None if
-    there isn't enough history to compute both windows reliably."""
+def compute_signal_scores(candles: list[DayRow]) -> Optional[dict]:
+    """
+    Splits the 30 days before the event into three phases:
+        baseline      = day -30 .. -15  (16 days) - normal reference behavior
+        accumulation  = day -14 .. -8   (7 days)  - the "quiet before" phase we care about
+        ignition      = day -7  .. -1   (7 days)  - the move may already be starting here
+
+    Returns a dict of scores, or None if there isn't enough history:
+        taker_accum_score = mean(taker, accumulation) - mean(taker, baseline)
+        taker_ignite_score = mean(taker, ignition) - mean(taker, accumulation)
+        bb_accum_score = mean(bb, baseline) - mean(bb, accumulation)   [positive = compression]
+        bb_ignite_score = mean(bb, ignition) - mean(bb, accumulation)  [positive = expansion/breakout]
+    """
     if len(candles) < MIN_HISTORY_NEEDED:
         return None
 
-    # use exactly the last TOTAL_LOOKBACK_DAYS days for the pre/baseline split
     window = candles[-TOTAL_LOOKBACK_DAYS:]
-    closes_full = [c.close for c in candles]  # full history for correct BB lookback
+    closes_full = [c.close for c in candles]
     bb_full = bollinger_width_series(closes_full, BB_PERIOD)
     bb_window = bb_full[-TOTAL_LOOKBACK_DAYS:]
-
     taker_window = [taker_buy_ratio(c) for c in window]
 
-    pre_taker = [v for v in taker_window[-PRE_WINDOW_DAYS:] if v is not None]
-    base_taker = [v for v in taker_window[:BASELINE_DAYS] if v is not None]
-    pre_bb = [v for v in bb_window[-PRE_WINDOW_DAYS:] if v is not None]
-    base_bb = [v for v in bb_window[:BASELINE_DAYS] if v is not None]
+    baseline_taker = [v for v in taker_window[:BASELINE_DAYS] if v is not None]
+    accum_taker = [v for v in taker_window[BASELINE_DAYS:BASELINE_DAYS + ACCUMULATION_DAYS] if v is not None]
+    ignite_taker = [v for v in taker_window[BASELINE_DAYS + ACCUMULATION_DAYS:] if v is not None]
 
-    if not pre_taker or not base_taker or not pre_bb or not base_bb:
+    baseline_bb = [v for v in bb_window[:BASELINE_DAYS] if v is not None]
+    accum_bb = [v for v in bb_window[BASELINE_DAYS:BASELINE_DAYS + ACCUMULATION_DAYS] if v is not None]
+    ignite_bb = [v for v in bb_window[BASELINE_DAYS + ACCUMULATION_DAYS:] if v is not None]
+
+    groups = [baseline_taker, accum_taker, ignite_taker, baseline_bb, accum_bb, ignite_bb]
+    if any(len(g) == 0 for g in groups):
         return None
 
-    taker_score = (sum(pre_taker) / len(pre_taker)) - (sum(base_taker) / len(base_taker))
-    # for volatility SQUEEZE we want the score to be POSITIVE when compression
-    # happens, so flip the sign: baseline_width - pre_width
-    bb_score = (sum(base_bb) / len(base_bb)) - (sum(pre_bb) / len(pre_bb))
+    def avg(xs: list[float]) -> float:
+        return sum(xs) / len(xs)
 
-    return taker_score, bb_score
+    return {
+        "taker_accum_score": avg(accum_taker) - avg(baseline_taker),
+        "taker_ignite_score": avg(ignite_taker) - avg(accum_taker),
+        "bb_accum_score": avg(baseline_bb) - avg(accum_bb),   # positive = compression vs baseline
+        "bb_ignite_score": avg(ignite_bb) - avg(accum_bb),    # positive = expansion vs accumulation
+    }
 
 
 def run_backtest() -> None:
@@ -180,25 +199,28 @@ def run_backtest() -> None:
     event_symbols = get_event_symbols(conn)
     print(f"      {len(event_symbols)} candidate event symbols")
 
-    event_taker_scores: list[float] = []
-    event_bb_scores: list[float] = []
+    event_scores: list[dict] = []
     event_used = 0
+    excluded_events: list[tuple[str, str, int]] = []
     for symbol, touched_date in event_symbols:
         candles = get_candles_before(conn, symbol, touched_date, MIN_HISTORY_NEEDED)
         scores = compute_signal_scores(candles)
         if scores is None:
+            excluded_events.append((symbol, touched_date, len(candles)))
             continue
-        event_taker_scores.append(scores[0])
-        event_bb_scores.append(scores[1])
+        event_scores.append(scores)
         event_used += 1
     print(f"      {event_used} event symbols had enough history ({MIN_HISTORY_NEEDED}+ days) to score")
+    if excluded_events:
+        print(f"      {len(excluded_events)} event symbols EXCLUDED for insufficient prior history:")
+        for sym, date, n in sorted(excluded_events, key=lambda x: x[1]):
+            print(f"        {sym:<14} touched_5x_date={date}  only {n}/{MIN_HISTORY_NEEDED} prior days available")
 
     print("[2/3] Building control group (random dates, symbols that never touched 5x)...")
     non_event_symbols = get_non_event_symbols(conn)
     random.shuffle(non_event_symbols)
 
-    control_taker_scores: list[float] = []
-    control_bb_scores: list[float] = []
+    control_scores: list[dict] = []
     control_used = 0
     for symbol in non_event_symbols:
         if control_used >= MAX_CONTROL_SAMPLES:
@@ -213,8 +235,7 @@ def run_backtest() -> None:
         scores = compute_signal_scores(candles)
         if scores is None:
             continue
-        control_taker_scores.append(scores[0])
-        control_bb_scores.append(scores[1])
+        control_scores.append(scores)
         control_used += 1
     print(f"      {control_used} control samples collected")
 
@@ -231,28 +252,35 @@ def run_backtest() -> None:
 
     print("\n[3/3] Statistical comparison (event group vs control group)\n")
 
-    def report(name: str, event_scores: list[float], control_scores: list[float]) -> None:
-        t_stat, p_value = stats.ttest_ind(event_scores, control_scores, equal_var=False)
-        event_mean = sum(event_scores) / len(event_scores)
-        control_mean = sum(control_scores) / len(control_scores)
+    def report(name: str, key: str) -> None:
+        event_vals = [s[key] for s in event_scores]
+        control_vals = [s[key] for s in control_scores]
+        t_stat, p_value = stats.ttest_ind(event_vals, control_vals, equal_var=False)
+        event_mean = sum(event_vals) / len(event_vals)
+        control_mean = sum(control_vals) / len(control_vals)
         verdict = (
             "LIKELY REAL SIGNAL (p < 0.05)" if p_value < 0.05
             else "NOT STATISTICALLY DISTINGUISHABLE FROM RANDOM (p >= 0.05)"
         )
         print(f"--- {name} ---")
-        print(f"Event group   mean score: {event_mean:+.5f}  (n={len(event_scores)})")
-        print(f"Control group mean score: {control_mean:+.5f}  (n={len(control_scores)})")
+        print(f"Event group   mean score: {event_mean:+.5f}  (n={len(event_vals)})")
+        print(f"Control group mean score: {control_mean:+.5f}  (n={len(control_vals)})")
         print(f"t-statistic: {t_stat:.3f}   p-value: {p_value:.4f}")
         print(f"Verdict: {verdict}\n")
 
-    report("H1: Taker Buy Ratio rises before explosion", event_taker_scores, control_taker_scores)
-    report("H2: Volatility (Bollinger Band width) compresses before explosion", event_bb_scores, control_bb_scores)
+    report("H1a: Taker Buy Ratio rises during ACCUMULATION (day -14..-8) vs baseline", "taker_accum_score")
+    report("H1b: Taker Buy Ratio rises further during IGNITION (day -7..-1) vs accumulation", "taker_ignite_score")
+    report("H2a: Volatility COMPRESSES during ACCUMULATION (day -14..-8) vs baseline", "bb_accum_score")
+    report("H2b: Volatility EXPANDS during IGNITION (day -7..-1) vs accumulation (the breakout itself)", "bb_ignite_score")
 
     print(
         "Reminder: statistical significance here means the pattern is unlikely to be pure\n"
         "chance GIVEN THIS DATA - it does not by itself mean the pattern is strong enough,\n"
         "reliable enough, or early enough to trade on profitably. Treat a positive result as\n"
-        "'worth building a live monitor for', not 'confirmed trading edge'."
+        "'worth building a live monitor for', not 'confirmed trading edge'.\n"
+        "The interesting case is H2a true + H2b true together: quiet compression BEFORE the\n"
+        "move, followed by real expansion once it starts - a genuine two-phase pattern,\n"
+        "not just 'volatility went up right as the price went up' (which is trivially true)."
     )
 
 
