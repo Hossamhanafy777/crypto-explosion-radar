@@ -1,1 +1,37 @@
-11
+name: Ignition Checker
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  check-ignition:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Check for ignition
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python check_ignition.py
+
+      - name: Commit alert state (only if changed)
+        run: |
+          git config user.name "ignition-checker-bot"
+          git config user.email "bot@users.noreply.github.com"
+          git add alerted_state.json
+          git diff --staged --quiet || git commit -m "Update alert state"
+          git push
