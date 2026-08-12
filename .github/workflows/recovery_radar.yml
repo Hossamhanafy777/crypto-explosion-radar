@@ -24,6 +24,8 @@ jobs:
 
       - name: Run Recovery Radar
         run: python recovery_radar_phase1.py
+      - name: Update watchlist
+        run: python update_watchlist.py
 
       - name: Commit updated database
         run: |
