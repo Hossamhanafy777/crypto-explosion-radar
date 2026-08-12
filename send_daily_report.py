@@ -47,13 +47,15 @@ def get_watchlist() -> list[dict]:
 def build_message(watchlist: list[dict]) -> str:
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     if not watchlist:
-        return f"*Daily Watchlist Report - {today}*\n\nNo symbols currently in compression."
+        return f"Daily Watchlist Report - {today}\n\nNo symbols currently in compression."
 
-    lines = [f"*Daily Watchlist Report - {today}*", f"{len(watchlist)} symbol(s) currently in compression:\n"]
+    lines = [f"Daily Watchlist Report - {today}", f"{len(watchlist)} symbol(s) currently in compression:\n"]
     for w in watchlist:
+        quiet = w["quiet_pct"] if w["quiet_pct"] is not None else 0.0
+        rng = w["range_pct"] if w["range_pct"] is not None else 0.0
+        ceiling = w["ceiling"] if w["ceiling"] is not None else 0.0
         lines.append(
-            f"`{w['symbol']}`  quiet={w['quiet_pct']:.0f}%  "
-            f"range={w['range_pct']:.0f}%  ceiling={w['ceiling']:.8f}"
+            f"{w['symbol']}  quiet={quiet:.0f}%  range={rng:.0f}%  ceiling={ceiling:.8f}"
         )
     lines.append("\nReminder: being on this list is not a signal by itself - it only means the coin is currently quiet relative to the market.")
     return "\n".join(lines)
@@ -68,7 +70,7 @@ def send_telegram(message: str) -> bool:
     try:
         resp = requests.post(
             f"https://api.telegram.org/bot{token}/sendMessage",
-            json={"chat_id": chat_id, "text": message, "parse_mode": "Markdown"},
+            json={"chat_id": chat_id, "text": message},
             timeout=15,
         )
         resp.raise_for_status()
