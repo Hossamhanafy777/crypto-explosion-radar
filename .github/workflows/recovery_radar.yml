@@ -26,6 +26,11 @@ jobs:
         run: python recovery_radar_phase1.py
       - name: Update watchlist
         run: python update_watchlist.py
+      - name: Send daily report
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: python send_daily_report.py
 
       - name: Commit updated database
         run: |
