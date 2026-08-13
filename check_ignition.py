@@ -29,6 +29,7 @@ import json
 import os
 import sys
 import time
+from datetime import datetime, timezone
 from pathlib import Path
 
 import requests
@@ -38,6 +39,7 @@ DB_PATH = "recovery_radar.db"
 STATE_PATH = Path("alerted_state.json")
 
 VOLUME_CONFIRM_MULTIPLIER = 2.0
+CONFIRMATION_MINUTES = 30  # breakout must persist for at least this long before alerting
 REQUEST_TIMEOUT = 15
 
 
@@ -129,10 +131,11 @@ def run() -> None:
         if ceiling is None:
             continue
 
-        # already alerted for this exact ceiling? skip (state key includes ceiling
-        # so a NEW compression cycle with a new ceiling can alert again)
         state_key = f"{symbol}:{ceiling:.10f}"
-        if state.get(state_key):
+        entry = state.get(state_key)
+
+        # already confirmed and alerted for this exact ceiling - nothing more to do
+        if isinstance(entry, dict) and entry.get("status") == "confirmed":
             continue
 
         ticker = fetch_ticker_24h(symbol)
@@ -145,20 +148,41 @@ def run() -> None:
             continue
 
         if live_price <= ceiling:
-            continue  # no breakout yet
+            # breakout failed or reversed - clear any pending state so a future
+            # real breakout can start a fresh confirmation cycle
+            if state_key in state:
+                del state[state_key]
+            continue
 
         avg_volume = get_recent_avg_quote_volume(symbol)
         if avg_volume is None or avg_volume <= 0:
             continue
 
-        # 24h volume vs recent daily average - rough but cheap confirmation
         if live_quote_volume_24h < VOLUME_CONFIRM_MULTIPLIER * avg_volume:
             continue  # breakout without volume confirmation - likely a fakeout, skip
 
+        now = datetime.now(timezone.utc)
+
+        if not isinstance(entry, dict) or entry.get("status") != "pending":
+            # first time we've seen this breakout - record when, wait for
+            # CONFIRMATION_MINUTES of it still holding before alerting
+            state[state_key] = {"status": "pending", "first_seen": now.isoformat(), "first_price": live_price}
+            print(f"[pending] {symbol} broke ceiling, starting {CONFIRMATION_MINUTES}-min confirmation window")
+            continue
+
+        first_seen = datetime.fromisoformat(entry["first_seen"])
+        elapsed_minutes = (now - first_seen).total_seconds() / 60
+
+        if elapsed_minutes < CONFIRMATION_MINUTES:
+            print(f"[pending] {symbol} still breaking out - {elapsed_minutes:.0f}/{CONFIRMATION_MINUTES} min confirmed")
+            continue
+
+        # held above ceiling with volume for the full confirmation window - alert
         pct_above = (live_price - ceiling) / ceiling * 100
         message = (
             f"Ignition Alert: {symbol}\n"
-            f"Broke above its 30-day range ceiling with volume confirmation.\n\n"
+            f"Broke above its 30-day range ceiling with volume confirmation "
+            f"(held for {CONFIRMATION_MINUTES}+ minutes).\n\n"
             f"Ceiling: {ceiling:.8f}\n"
             f"Live price: {live_price:.8f} (+{pct_above:.1f}% above ceiling)\n"
             f"24h volume: {live_quote_volume_24h:,.0f} USDT "
@@ -167,7 +191,7 @@ def run() -> None:
             f"Verify manually before acting."
         )
         if send_telegram_alert(message):
-            state[state_key] = True
+            state[state_key] = {"status": "confirmed"}
             alerts_sent += 1
             print(f"[alert sent] {symbol}")
 
