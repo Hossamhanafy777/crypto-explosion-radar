@@ -28,17 +28,17 @@ DB_PATH = "recovery_radar.db"
 def get_watchlist() -> list[dict]:
     conn = sqlite3.connect(DB_PATH)
     cur = conn.execute(
-        """SELECT symbol, quiet_pct_90d, current_30d_range_pct, range_ceiling, range_floor
+        """SELECT symbol, current_percentile, persistence_pct, current_30d_range_pct, range_ceiling, range_floor
            FROM watchlist
            WHERE in_compression = 1
-           ORDER BY quiet_pct_90d DESC"""
+           ORDER BY current_percentile ASC"""
     )
     rows = cur.fetchall()
     conn.close()
     return [
         {
-            "symbol": r[0], "quiet_pct": r[1], "range_pct": r[2],
-            "ceiling": r[3], "floor": r[4],
+            "symbol": r[0], "percentile": r[1], "persistence": r[2],
+            "range_pct": r[3], "ceiling": r[4], "floor": r[5],
         }
         for r in rows
     ]
@@ -51,13 +51,15 @@ def build_message(watchlist: list[dict]) -> str:
 
     lines = [f"Daily Watchlist Report - {today}", f"{len(watchlist)} symbol(s) currently in compression:\n"]
     for w in watchlist:
-        quiet = w["quiet_pct"] if w["quiet_pct"] is not None else 0.0
+        pct = w["percentile"] if w["percentile"] is not None else 0.0
+        persist = w["persistence"] if w["persistence"] is not None else 0.0
         rng = w["range_pct"] if w["range_pct"] is not None else 0.0
         ceiling = w["ceiling"] if w["ceiling"] is not None else 0.0
         lines.append(
-            f"{w['symbol']}  quiet={quiet:.0f}%  range={rng:.0f}%  ceiling={ceiling:.8f}"
+            f"{w['symbol']}  tightest={pct:.1f}pct-of-own-history  "
+            f"persistence={persist:.0f}%  range={rng:.0f}%  ceiling={ceiling:.8f}"
         )
-    lines.append("\nReminder: being on this list is not a signal by itself - it only means the coin is currently quiet relative to the market.")
+    lines.append("\nReminder: being on this list is not a signal by itself - it only means the coin is currently unusually quiet compared to its OWN history.")
     return "\n".join(lines)
 
 
