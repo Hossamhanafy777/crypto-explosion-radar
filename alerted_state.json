@@ -6,8 +6,18 @@
     "status": "confirmed"
   },
   "GPSUSDT:0.0101300000": {
+    "status": "confirmed",
+    "symbol": "GPSUSDT",
+    "ceiling": 0.01013,
+    "alert_price": 0.01144,
+    "alert_time": "2026-08-13T13:17:17.065146+00:00",
+    "peak_price": 0.01145,
+    "weakness_alert_sent": false,
+    "closed": false
+  },
+  "EDENUSDT:0.0475100000": {
     "status": "pending",
-    "first_seen": "2026-08-13T12:06:44.576062+00:00",
-    "first_price": 0.01118
+    "first_seen": "2026-08-13T13:17:23.985208+00:00",
+    "first_price": 0.0482
   }
 }
