@@ -16,8 +16,13 @@
     "closed": false
   },
   "EDENUSDT:0.0475100000": {
-    "status": "pending",
-    "first_seen": "2026-08-13T13:17:23.985208+00:00",
-    "first_price": 0.0482
+    "status": "confirmed",
+    "symbol": "EDENUSDT",
+    "ceiling": 0.04751,
+    "alert_price": 0.04829,
+    "alert_time": "2026-08-13T15:35:52.267523+00:00",
+    "peak_price": 0.04829,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
