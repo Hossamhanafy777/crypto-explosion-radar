@@ -51,6 +51,9 @@ _NEW_WATCHLIST_COLUMNS = [
     ("current_percentile", "REAL"),
     ("persistence_pct", "REAL"),
     ("history_days", "INTEGER"),
+    ("current_price", "REAL"),
+    ("proximity_pct", "REAL"),      # 0=at 30d floor, 100=at 30d ceiling
+    ("explosion_score", "REAL"),    # composite readiness score, 0-100, higher=closer to a breakout
 ]
 
 
@@ -69,6 +72,9 @@ def get_conn() -> sqlite3.Connection:
             range_ceiling REAL,     -- highest High in the last 30 days (breakout level)
             range_floor REAL,       -- lowest Low in the last 30 days
             history_days INTEGER,
+            current_price REAL,
+            proximity_pct REAL,
+            explosion_score REAL,
             alerted INTEGER NOT NULL DEFAULT 0,
             alerted_at TEXT
         );
@@ -146,6 +152,14 @@ def evaluate_symbol(conn: sqlite3.Connection, symbol: str) -> dict | None:
     last_window = candles[-ROLLING_WINDOW:]
     ceiling = max(c[1] for c in last_window)  # highest High
     floor = min(c[2] for c in last_window)    # lowest Low
+    current_price = candles[-1][1]  # use the latest stored High as a close proxy (cheap, no extra API call)
+
+    proximity_pct = 50.0
+    if ceiling > floor:
+        proximity_pct = max(0.0, min(100.0, (current_price - floor) / (ceiling - floor) * 100))
+
+    tightness_score = max(0.0, 100.0 - current_percentile)
+    explosion_score = 0.4 * tightness_score + 0.3 * persistence_pct + 0.3 * proximity_pct
 
     return {
         "in_compression": in_compression,
@@ -155,6 +169,9 @@ def evaluate_symbol(conn: sqlite3.Connection, symbol: str) -> dict | None:
         "range_ceiling": ceiling,
         "range_floor": floor,
         "history_days": len(candles),
+        "current_price": current_price,
+        "proximity_pct": round(proximity_pct, 1),
+        "explosion_score": round(explosion_score, 1),
     }
 
 
@@ -186,8 +203,9 @@ def run() -> None:
             INSERT INTO watchlist
                 (symbol, computed_date, in_compression, current_percentile,
                  persistence_pct, current_30d_range_pct, range_ceiling, range_floor,
-                 history_days, alerted, alerted_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                 history_days, current_price, proximity_pct, explosion_score,
+                 alerted, alerted_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(symbol) DO UPDATE SET
                 computed_date=excluded.computed_date,
                 in_compression=excluded.in_compression,
@@ -197,6 +215,9 @@ def run() -> None:
                 range_ceiling=excluded.range_ceiling,
                 range_floor=excluded.range_floor,
                 history_days=excluded.history_days,
+                current_price=excluded.current_price,
+                proximity_pct=excluded.proximity_pct,
+                explosion_score=excluded.explosion_score,
                 alerted=excluded.alerted,
                 alerted_at=CASE WHEN excluded.alerted=0 THEN NULL ELSE watchlist.alerted_at END
             """,
@@ -204,6 +225,7 @@ def run() -> None:
                 symbol, today, int(result["in_compression"]), result["current_percentile"],
                 result["persistence_pct"], result["current_30d_range_pct"],
                 result["range_ceiling"], result["range_floor"], result["history_days"],
+                result["current_price"], result["proximity_pct"], result["explosion_score"],
                 alerted, alerted_at,
             ),
         )
