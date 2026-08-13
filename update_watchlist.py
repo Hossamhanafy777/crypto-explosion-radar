@@ -47,6 +47,13 @@ STABLE_PEGGED_EXCLUDE = {
 }
 
 
+_NEW_WATCHLIST_COLUMNS = [
+    ("current_percentile", "REAL"),
+    ("persistence_pct", "REAL"),
+    ("history_days", "INTEGER"),
+]
+
+
 def get_conn() -> sqlite3.Connection:
     conn = sqlite3.connect(DB_PATH)
     conn.execute("PRAGMA journal_mode=WAL;")
@@ -67,6 +74,13 @@ def get_conn() -> sqlite3.Connection:
         );
         """
     )
+    conn.commit()
+    # the table may already exist on disk from an earlier schema version
+    # (quiet_pct_90d/market_baseline_used) - add any missing new columns
+    existing = {row[1] for row in conn.execute("PRAGMA table_info(watchlist)").fetchall()}
+    for col_name, col_type in _NEW_WATCHLIST_COLUMNS:
+        if col_name not in existing:
+            conn.execute(f"ALTER TABLE watchlist ADD COLUMN {col_name} {col_type}")
     conn.commit()
     return conn
 
