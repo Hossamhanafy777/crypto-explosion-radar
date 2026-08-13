@@ -40,6 +40,8 @@ STATE_PATH = Path("alerted_state.json")
 
 VOLUME_CONFIRM_MULTIPLIER = 2.0
 CONFIRMATION_MINUTES = 30  # breakout must persist for at least this long before alerting
+WEAKNESS_DRAWDOWN_PCT = 15.0   # send a weakness update if price pulls back this much from its post-alert peak
+TRACKING_WINDOW_HOURS = 48    # stop tracking a confirmed alert after this long, regardless of outcome
 REQUEST_TIMEOUT = 15
 
 
@@ -118,6 +120,77 @@ def send_telegram_alert(message: str) -> bool:
         return False
 
 
+def track_confirmed_alerts(state: dict) -> int:
+    """For every already-confirmed alert not yet closed, check for two
+    outcomes and send a follow-up Telegram update:
+        - price fell back below ceiling -> FALSE BREAKOUT, close tracking
+        - price still above ceiling but pulled back >= WEAKNESS_DRAWDOWN_PCT
+          from its post-alert peak -> WEAKNESS update (sent once)
+    Tracking stops automatically after TRACKING_WINDOW_HOURS regardless.
+    Returns the number of follow-up messages sent.
+    """
+    updates_sent = 0
+    now = datetime.now(timezone.utc)
+
+    for state_key, entry in list(state.items()):
+        if not isinstance(entry, dict) or entry.get("status") != "confirmed" or entry.get("closed"):
+            continue
+
+        symbol = entry.get("symbol")
+        ceiling = entry.get("ceiling")
+        if not symbol or ceiling is None:
+            continue
+
+        alert_time = datetime.fromisoformat(entry["alert_time"])
+        hours_since_alert = (now - alert_time).total_seconds() / 3600
+        if hours_since_alert >= TRACKING_WINDOW_HOURS:
+            entry["closed"] = True
+            print(f"[tracking ended] {symbol} - {TRACKING_WINDOW_HOURS}h tracking window elapsed")
+            continue
+
+        ticker = fetch_ticker_24h(symbol)
+        if ticker is None:
+            continue
+        try:
+            live_price = float(ticker["lastPrice"])
+        except (KeyError, ValueError):
+            continue
+
+        if live_price < ceiling:
+            message = (
+                f"Update: {symbol} - FALSE BREAKOUT confirmed\n\n"
+                f"Price fell back below the {ceiling:.8f} ceiling "
+                f"(now {live_price:.8f}), reversing the earlier ignition alert.\n"
+                f"Peak reached after the alert: {entry.get('peak_price', entry.get('alert_price')):.8f}"
+            )
+            if send_telegram_alert(message):
+                entry["closed"] = True
+                updates_sent += 1
+                print(f"[false breakout update sent] {symbol}")
+            continue
+
+        peak_price = max(entry.get("peak_price", live_price), live_price)
+        entry["peak_price"] = peak_price
+
+        drawdown_pct = (peak_price - live_price) / peak_price * 100 if peak_price > 0 else 0
+
+        if drawdown_pct >= WEAKNESS_DRAWDOWN_PCT and not entry.get("weakness_alert_sent"):
+            message = (
+                f"Update: {symbol} - weakness signs after breakout\n\n"
+                f"Still holding above the {ceiling:.8f} ceiling, but has pulled back "
+                f"{drawdown_pct:.1f}% from its post-alert peak of {peak_price:.8f}.\n"
+                f"Current price: {live_price:.8f}\n\n"
+                f"Momentum may be fading - not necessarily a failed breakout, "
+                f"but worth re-checking before adding to a position."
+            )
+            if send_telegram_alert(message):
+                entry["weakness_alert_sent"] = True
+                updates_sent += 1
+                print(f"[weakness update sent] {symbol}")
+
+    return updates_sent
+
+
 def run() -> None:
     watchlist = get_watchlist()
     print(f"Checking {len(watchlist)} watchlist symbols for live breakout...")
@@ -191,12 +264,23 @@ def run() -> None:
             f"Verify manually before acting."
         )
         if send_telegram_alert(message):
-            state[state_key] = {"status": "confirmed"}
+            state[state_key] = {
+                "status": "confirmed",
+                "symbol": symbol,
+                "ceiling": ceiling,
+                "alert_price": live_price,
+                "alert_time": now.isoformat(),
+                "peak_price": live_price,
+                "weakness_alert_sent": False,
+                "closed": False,
+            }
             alerts_sent += 1
             print(f"[alert sent] {symbol}")
 
+    tracking_updates = track_confirmed_alerts(state)
+
     save_state(state)
-    print(f"Done. {alerts_sent} new alert(s) sent this run.")
+    print(f"Done. {alerts_sent} new alert(s), {tracking_updates} follow-up update(s) sent this run.")
 
 
 if __name__ == "__main__":
