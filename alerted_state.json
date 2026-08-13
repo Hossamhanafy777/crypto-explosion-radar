@@ -1,12 +1,13 @@
 {
   "NOTUSDT:0.0003850000": {
-    "status": "pending",
-    "first_seen": "2026-08-13T09:44:16.778175+00:00",
-    "first_price": 0.000387
+    "status": "confirmed"
   },
   "AVNTUSDT:0.0977000000": {
+    "status": "confirmed"
+  },
+  "GPSUSDT:0.0101300000": {
     "status": "pending",
-    "first_seen": "2026-08-13T09:44:30.794752+00:00",
-    "first_price": 0.1099
+    "first_seen": "2026-08-13T12:06:44.576062+00:00",
+    "first_price": 0.01118
   }
 }
