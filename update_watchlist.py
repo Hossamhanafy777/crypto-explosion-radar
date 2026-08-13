@@ -1,20 +1,26 @@
 """
-Watchlist Builder - Phase 2
-============================
+Watchlist Builder - Phase 2 (v2: self-relative percentile compression)
+========================================================================
 Runs once per day (as part of the same daily job as recovery_radar_phase1.py,
 right after candle ingestion). Identifies which currently-listed coins are
 RIGHT NOW in a genuine "quiet compression" phase, based on the pattern
-validated against the 40-coin explosion history:
-    - 27/29 testable historical explosions (93%) showed a real quiet period
-      before breaking out, with a median max quiet-streak of 38 days.
-    - "Quiet" is defined RELATIVE to the market's own typical volatility
-      (full-market median 30-day range was measured at ~145%), not an
-      arbitrary fixed number.
+validated against the 40-coin explosion history (27/29 testable explosions
+showed a real quiet period first, median max quiet-streak 38 days).
 
-This script does NOT predict anything by itself - it narrows ~490 coins down
-to a short "Watchlist" of genuine compression candidates and records each
-one's current range ceiling/floor. The separate, frequently-running
-check_ignition.py then watches ONLY this short list for a live breakout.
+DESIGN NOTE - why this isn't "range < X% of market average":
+A shared market-wide threshold and a fixed calendar window (e.g. "180 days")
+both failed a real backtest against TUT/USDT's actual pre-explosion history -
+TUT's own quietest point (~21.7% 30-day range) never dropped as low as a
+generic market-wide threshold demanded, simply because TUT is naturally a
+much more volatile coin than the market average. A quiet coin and a wild
+coin can't fairly share one bar.
+
+Instead, each coin is compared ONLY to ITS OWN historical range distribution
+(self-relative percentile rank) - no fixed day-count, no shared market
+number. A coin qualifies when its current 30-day rolling range sits in the
+bottom PERCENTILE_THRESHOLD% of its own full available history, and that
+tightness has persisted for a meaningful chunk of the recent period (not
+just a single lucky day).
 
 Usage: python update_watchlist.py
 Reads/writes: recovery_radar.db (must already exist and be freshly ingested)
@@ -28,17 +34,14 @@ from datetime import datetime, timezone
 
 DB_PATH = "recovery_radar.db"
 
-ROLLING_WINDOW = 30          # days, for the "current range" and "ceiling/floor"
-QUIET_LOOKBACK = 90          # days, for measuring %-time-quiet
-QUIET_THRESHOLD_FACTOR = 0.5 # "quiet" = current 30d range < 0.5 * market median
-MIN_QUIET_PCT = 50.0         # must have spent at least this % of the lookback quiet
-MIN_HISTORY_DAYS = ROLLING_WINDOW + QUIET_LOOKBACK  # 120 days needed
+ROLLING_WINDOW = 30           # days, for the "current range" and ceiling/floor
+PERCENTILE_THRESHOLD = 15.0   # must be in the tightest 15% of the coin's OWN history
+PERSISTENCE_LOOKBACK = 60     # days, how far back to check persistence
+MIN_PERSISTENCE_PCT = 30.0    # at least this % of the last 60 days must also be this tight
+MIN_HISTORY_FOR_PERCENTILE = 150  # need a reasonably large sample to trust a percentile rank
 
 # Coins to NEVER treat as compression candidates - pegged/stable assets are
 # trivially "tight" by design and would otherwise dominate the watchlist.
-# Verified against this database on 2026-08-13: UUSDT and KGSTUSDT are real
-# stablecoins (fiat-pegged), not data errors - caught by the 'USD' substring
-# rule and this explicit set respectively.
 STABLE_PEGGED_EXCLUDE = {
     "EUR", "EURI", "AEUR", "U", "KGST", "PAXG", "XAUT", "WBTC", "WBETH",
 }
@@ -53,11 +56,12 @@ def get_conn() -> sqlite3.Connection:
             symbol TEXT PRIMARY KEY,
             computed_date TEXT NOT NULL,
             in_compression INTEGER NOT NULL,
-            quiet_pct_90d REAL,
+            current_percentile REAL,       -- where today's range sits in the coin's OWN history (0-100, lower=tighter)
+            persistence_pct REAL,          -- % of last 60 days also this tight
             current_30d_range_pct REAL,
             range_ceiling REAL,     -- highest High in the last 30 days (breakout level)
             range_floor REAL,       -- lowest Low in the last 30 days
-            market_baseline_used REAL,
+            history_days INTEGER,
             alerted INTEGER NOT NULL DEFAULT 0,
             alerted_at TEXT
         );
@@ -75,104 +79,87 @@ def is_excluded(base_asset: str) -> bool:
     return False
 
 
-def compute_market_baseline(conn: sqlite3.Connection) -> float:
-    """Median 30-day range% across all eligible (non-excluded) symbols today -
-    this is what 'quiet relative to the market' is measured against."""
-    cur = conn.execute("SELECT symbol, base_asset FROM universe")
-    symbols = [(s, b) for s, b in cur.fetchall() if not is_excluded(b)]
-
-    values = []
-    for symbol, _ in symbols:
-        cur2 = conn.execute(
-            """SELECT high, low FROM candles_daily
-               WHERE symbol=? ORDER BY open_time_utc DESC LIMIT ?""",
-            (symbol, ROLLING_WINDOW),
-        )
-        rows = cur2.fetchall()
-        if len(rows) < ROLLING_WINDOW:
-            continue
-        highs = [r[0] for r in rows]
-        lows = [r[1] for r in rows]
-        if min(lows) <= 0:
-            continue
-        values.append((max(highs) - min(lows)) / min(lows) * 100)
-
-    if not values:
-        return 145.0  # fallback to the last known measured baseline
-    values.sort()
-    n = len(values)
-    return values[n // 2] if n % 2 else (values[n // 2 - 1] + values[n // 2]) / 2
-
-
-def rolling_range_series(candles: list[tuple], window: int) -> list[float]:
-    """candles must be chronological [(day, close, high, low), ...]. Returns
-    range% at each point once enough history exists."""
+def compute_range_series(candles: list[tuple], window: int) -> list[float]:
+    """candles must be chronological [(day, high, low), ...]. Returns range%
+    at each point once enough history exists (skips windows with a zero low)."""
     out = []
     for i in range(window, len(candles) + 1):
         chunk = candles[i - window : i]
-        highs = [c[2] for c in chunk]
-        lows = [c[3] for c in chunk]
+        highs = [c[1] for c in chunk]
+        lows = [c[2] for c in chunk]
         if min(lows) <= 0:
-            out.append(None)
             continue
         out.append((max(highs) - min(lows)) / min(lows) * 100)
     return out
 
 
-def evaluate_symbol(conn: sqlite3.Connection, symbol: str, market_baseline: float) -> dict | None:
+def percentile_rank(series: list[float], value: float) -> float:
+    """% of the series that is <= value (0 = tightest ever, 100 = widest ever)."""
+    if not series:
+        return 100.0
+    below_or_equal = sum(1 for v in series if v <= value)
+    return below_or_equal / len(series) * 100
+
+
+def evaluate_symbol(conn: sqlite3.Connection, symbol: str) -> dict | None:
     cur = conn.execute(
-        """SELECT open_time_utc, close, high, low FROM candles_daily
+        """SELECT open_time_utc, high, low FROM candles_daily
            WHERE symbol=? ORDER BY open_time_utc""",
         (symbol,),
     )
     candles = cur.fetchall()
-    if len(candles) < MIN_HISTORY_DAYS:
+    if len(candles) < MIN_HISTORY_FOR_PERCENTILE + ROLLING_WINDOW:
         return None
 
-    threshold = market_baseline * QUIET_THRESHOLD_FACTOR
-    rr = rolling_range_series(candles, ROLLING_WINDOW)
-    recent = rr[-QUIET_LOOKBACK:]
-    recent_valid = [v for v in recent if v is not None]
-    if not recent_valid:
+    range_series = compute_range_series(candles, ROLLING_WINDOW)
+    if len(range_series) < MIN_HISTORY_FOR_PERCENTILE:
         return None
 
-    current_range_pct = recent_valid[-1]
-    quiet_pct = sum(1 for v in recent_valid if v < threshold) / len(recent_valid) * 100
-    in_compression = current_range_pct < threshold and quiet_pct >= MIN_QUIET_PCT
+    current_range = range_series[-1]
+    current_percentile = percentile_rank(range_series, current_range)
 
-    last30 = candles[-ROLLING_WINDOW:]
-    ceiling = max(c[2] for c in last30)  # highest High
-    floor = min(c[3] for c in last30)    # lowest Low
+    # persistence: what fraction of the recent lookback was ALSO this tight,
+    # using the value that marks the percentile cutoff (self-relative, not a
+    # separate arbitrary number)
+    sorted_series = sorted(range_series)
+    cutoff_idx = max(0, int(len(sorted_series) * PERCENTILE_THRESHOLD / 100) - 1)
+    cutoff_value = sorted_series[cutoff_idx]
+    recent = range_series[-PERSISTENCE_LOOKBACK:] if len(range_series) >= PERSISTENCE_LOOKBACK else range_series
+    persistence_pct = sum(1 for v in recent if v <= cutoff_value) / len(recent) * 100
+
+    in_compression = current_percentile <= PERCENTILE_THRESHOLD and persistence_pct >= MIN_PERSISTENCE_PCT
+
+    last_window = candles[-ROLLING_WINDOW:]
+    ceiling = max(c[1] for c in last_window)  # highest High
+    floor = min(c[2] for c in last_window)    # lowest Low
 
     return {
         "in_compression": in_compression,
-        "quiet_pct_90d": round(quiet_pct, 1),
-        "current_30d_range_pct": round(current_range_pct, 1),
+        "current_percentile": round(current_percentile, 1),
+        "persistence_pct": round(persistence_pct, 1),
+        "current_30d_range_pct": round(current_range, 1),
         "range_ceiling": ceiling,
         "range_floor": floor,
+        "history_days": len(candles),
     }
 
 
 def run() -> None:
     conn = get_conn()
-    print("[1/2] Computing today's market baseline (median 30-day range across eligible coins)...")
-    baseline = compute_market_baseline(conn)
-    threshold = baseline * QUIET_THRESHOLD_FACTOR
-    print(f"      Market baseline: {baseline:.1f}%   Quiet threshold: {threshold:.1f}%")
-
     cur = conn.execute("SELECT symbol, base_asset FROM universe")
     symbols = [(s, b) for s, b in cur.fetchall() if not is_excluded(b)]
-    print(f"[2/2] Evaluating {len(symbols)} eligible symbols (stablecoins/pegged assets excluded)...")
+    print(f"[1/1] Evaluating {len(symbols)} eligible symbols against their OWN historical range distribution...")
+    print(f"      (stablecoins/pegged assets excluded; need {MIN_HISTORY_FOR_PERCENTILE}+ days of history to qualify)")
 
     today = datetime.now(timezone.utc).date().isoformat()
     in_compression_count = 0
+    skipped_short_history = 0
     for symbol, _ in symbols:
-        result = evaluate_symbol(conn, symbol, baseline)
+        result = evaluate_symbol(conn, symbol)
         if result is None:
+            skipped_short_history += 1
             continue
 
-        # check if the ceiling changed since last time - if so, this is a NEW
-        # compression cycle and any previous alert should be cleared
         cur2 = conn.execute("SELECT range_ceiling, alerted FROM watchlist WHERE symbol=?", (symbol,))
         prev = cur2.fetchone()
         alerted = 0
@@ -183,25 +170,27 @@ def run() -> None:
         conn.execute(
             """
             INSERT INTO watchlist
-                (symbol, computed_date, in_compression, quiet_pct_90d,
-                 current_30d_range_pct, range_ceiling, range_floor,
-                 market_baseline_used, alerted, alerted_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                (symbol, computed_date, in_compression, current_percentile,
+                 persistence_pct, current_30d_range_pct, range_ceiling, range_floor,
+                 history_days, alerted, alerted_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             ON CONFLICT(symbol) DO UPDATE SET
                 computed_date=excluded.computed_date,
                 in_compression=excluded.in_compression,
-                quiet_pct_90d=excluded.quiet_pct_90d,
+                current_percentile=excluded.current_percentile,
+                persistence_pct=excluded.persistence_pct,
                 current_30d_range_pct=excluded.current_30d_range_pct,
                 range_ceiling=excluded.range_ceiling,
                 range_floor=excluded.range_floor,
-                market_baseline_used=excluded.market_baseline_used,
+                history_days=excluded.history_days,
                 alerted=excluded.alerted,
                 alerted_at=CASE WHEN excluded.alerted=0 THEN NULL ELSE watchlist.alerted_at END
             """,
             (
-                symbol, today, int(result["in_compression"]), result["quiet_pct_90d"],
-                result["current_30d_range_pct"], result["range_ceiling"], result["range_floor"],
-                baseline, alerted, alerted_at,
+                symbol, today, int(result["in_compression"]), result["current_percentile"],
+                result["persistence_pct"], result["current_30d_range_pct"],
+                result["range_ceiling"], result["range_floor"], result["history_days"],
+                alerted, alerted_at,
             ),
         )
         if result["in_compression"]:
@@ -209,7 +198,8 @@ def run() -> None:
 
     conn.commit()
     conn.close()
-    print(f"Done. {in_compression_count} symbols currently in compression (on the watchlist).")
+    print(f"Done. {in_compression_count} symbols currently in compression (self-relative percentile).")
+    print(f"({skipped_short_history} symbols skipped for insufficient history - need {MIN_HISTORY_FOR_PERCENTILE}+ days)")
 
 
 if __name__ == "__main__":
