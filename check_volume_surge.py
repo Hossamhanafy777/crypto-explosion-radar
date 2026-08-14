@@ -12,6 +12,16 @@ GATE (per your decision): excludes any coin with ever_touched_5x=1 in
 recovery_snapshot (already made its move since the Oct-11 crash low) and the
 same stablecoin/pegged exclusion list used elsewhere.
 
+ADDITIONAL GATES (added after a live run produced 23 false-positive-heavy
+alerts - root cause: recently-listed thin instruments like tokenized stocks
+(AMATBUSDT, MSTRBUSDT, NFLXBUSDT) have unstable tiny 20-day averages, so any
+normal trading day looks like a huge ratio; and near-50/50 taker ratios mean
+no real directional conviction):
+    - MIN_HISTORY_DAYS: excludes recently-listed/thin instruments
+    - MIN_ABSOLUTE_DAILY_VOLUME: excludes illiquid coins (ratio-only noise)
+    - MIN_TAKER_BUY_RATIO: entry gate, not just a scoring input - requires
+      real buying conviction, not near-50/50 noise
+
 FOUR-FACTOR COMPOSITE SCORE (0-100), weights as agreed:
     35%  Volume surge strength   - today's live quote volume vs its own 20-day average
     30%  Taker buy ratio         - aggressive buying vs total volume, today so far
@@ -63,6 +73,9 @@ DB_PATH = "recovery_radar.db"
 STATE_PATH = Path("volume_surge_state.json")
 
 SURGE_MULTIPLIER = 3.0        # Stage 1 shortlist threshold: live volume vs 20-day avg
+MIN_HISTORY_DAYS = 150        # exclude thinly-traded/recently-listed instruments (matches watchlist rule)
+MIN_ABSOLUTE_DAILY_VOLUME = 100_000  # USDT - excludes illiquid coins where ratios are meaningless noise
+MIN_TAKER_BUY_RATIO = 0.55    # entry gate, not just a scoring input - filters out near-50/50 (no real conviction)
 STAGE2_MAX_CANDIDATES = 30    # cap deep-check API calls per run
 CONFIRMATION_MINUTES = 30
 REQUEST_TIMEOUT = 20
@@ -115,6 +128,11 @@ def get_eligible_symbols(conn: sqlite3.Connection) -> list[str]:
             continue
         out.append(symbol)
     return out
+
+
+def get_history_days(conn: sqlite3.Connection, symbol: str) -> int:
+    cur = conn.execute("SELECT count(*) FROM candles_daily WHERE symbol=?", (symbol,))
+    return cur.fetchone()[0]
 
 
 def get_avg_quote_volume(conn: sqlite3.Connection, symbol: str, days: int = 20) -> float | None:
@@ -227,6 +245,16 @@ def run() -> None:
         if not avg_volume or avg_volume <= 0:
             continue
 
+        # gate: minimum history (excludes recently-listed instruments like
+        # tokenized stocks, whose thin/unstable average makes any ratio noisy)
+        if get_history_days(conn, symbol) < MIN_HISTORY_DAYS:
+            continue
+
+        # gate: minimum absolute daily volume (excludes illiquid coins where
+        # a ratio spike is just noise around a tiny, meaningless baseline)
+        if avg_volume < MIN_ABSOLUTE_DAILY_VOLUME:
+            continue
+
         volume_ratio = live_quote_volume / avg_volume
         if volume_ratio >= SURGE_MULTIPLIER:
             shortlist.append((symbol, volume_ratio, live_price, price_change_pct))
@@ -245,6 +273,11 @@ def run() -> None:
             continue
 
         taker_ratio = today["taker_buy_quote_volume"] / today["quote_volume"]
+
+        # gate: require real directional conviction, not near-50/50 noise
+        if taker_ratio < MIN_TAKER_BUY_RATIO:
+            continue
+
         avg_trades = get_avg_trade_count(conn, symbol) or 1
         trade_ratio = today["trade_count"] / avg_trades
 
