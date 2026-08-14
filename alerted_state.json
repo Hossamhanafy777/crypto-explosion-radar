@@ -24,5 +24,10 @@
     "peak_price": 0.07639,
     "weakness_alert_sent": true,
     "closed": false
+  },
+  "PLUMEUSDT:0.0132200000": {
+    "status": "pending",
+    "first_seen": "2026-08-14T07:46:05.047567+00:00",
+    "first_price": 0.01324
   }
 }
