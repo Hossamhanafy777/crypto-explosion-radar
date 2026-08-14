@@ -13,7 +13,7 @@
     "alert_time": "2026-08-13T13:17:17.065146+00:00",
     "peak_price": 0.01196,
     "weakness_alert_sent": true,
-    "closed": false
+    "closed": true
   },
   "EDENUSDT:0.0475100000": {
     "status": "confirmed",
