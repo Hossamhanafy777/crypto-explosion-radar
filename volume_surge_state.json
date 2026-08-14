@@ -1,0 +1,186 @@
+{
+  "vs:AMATBUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      506.65
+    ],
+    "score": 76.0
+  },
+  "vs:2ZUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.05215
+    ],
+    "score": 80.1
+  },
+  "vs:ONGUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.04364
+    ],
+    "score": 79.1
+  },
+  "vs:ALICEUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.1497
+    ],
+    "score": 85.3
+  },
+  "vs:PLUMEUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.01247
+    ],
+    "score": 77.1
+  },
+  "vs:SCRTUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.028
+    ],
+    "score": 71.6
+  },
+  "vs:ACEUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.2867
+    ],
+    "score": 82.3
+  },
+  "vs:RVNUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.0027
+    ],
+    "score": 68.9
+  },
+  "vs:AVNTUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.1074
+    ],
+    "score": 56.2
+  },
+  "vs:REDUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.0883
+    ],
+    "score": 65.2
+  },
+  "vs:SLPUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.000551
+    ],
+    "score": 58.5
+  },
+  "vs:GPSUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.01013
+    ],
+    "score": 53.8
+  },
+  "vs:AWEUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.06298
+    ],
+    "score": 54.0
+  },
+  "vs:BNSOLUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      84.9
+    ],
+    "score": 56.3
+  },
+  "vs:NFLXBUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      78.19
+    ],
+    "score": 49.4
+  },
+  "vs:MOVEUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.0071
+    ],
+    "score": 49.2
+  },
+  "vs:XAIUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.00687
+    ],
+    "score": 52.4
+  },
+  "vs:PIXELUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.00478
+    ],
+    "score": 55.0
+  },
+  "vs:BTTCUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      2.6e-07
+    ],
+    "score": 35.7
+  },
+  "vs:CRDOBUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      256.69
+    ],
+    "score": 45.7
+  },
+  "vs:MSTRBUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      94.61
+    ],
+    "score": 40.0
+  },
+  "vs:DOLOUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      0.02366
+    ],
+    "score": 58.3
+  },
+  "vs:ILVUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T17:06:06.162640+00:00",
+    "prices": [
+      3.1
+    ],
+    "score": 49.8
+  }
+}
