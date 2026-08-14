@@ -241,6 +241,18 @@ def run() -> None:
             # CONFIRMATION_MINUTES of it still holding before alerting
             state[state_key] = {"status": "pending", "first_seen": now.isoformat(), "first_price": live_price}
             print(f"[pending] {symbol} broke ceiling, starting {CONFIRMATION_MINUTES}-min confirmation window")
+
+            pct_above = (live_price - ceiling) / ceiling * 100
+            pending_message = (
+                f"Pending: {symbol} just broke its ceiling\n\n"
+                f"Ceiling: {ceiling:.8f}\n"
+                f"Live price: {live_price:.8f} (+{pct_above:.1f}% above ceiling)\n"
+                f"24h volume: {live_quote_volume_24h:,.0f} USDT\n\n"
+                f"Volume confirmed, now watching for {CONFIRMATION_MINUTES} minutes to confirm "
+                f"it holds before the full Ignition Alert. This is NOT confirmed yet - "
+                f"could still reverse and turn into a false breakout."
+            )
+            send_telegram_alert(pending_message)
             continue
 
         first_seen = datetime.fromisoformat(entry["first_seen"])
