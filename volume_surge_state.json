@@ -135,16 +135,19 @@
     "score": 52.2
   },
   "vs:BNSOLUSDT": {
-    "status": "confirmed",
-    "confirmed_at": "2026-08-14T20:46:25.123509+00:00"
-  },
-  "vs:REDUSDT": {
     "status": "pending",
-    "first_seen": "2026-08-14T20:31:09.734764+00:00",
+    "first_seen": "2026-08-14T21:01:34.327499+00:00",
     "prices": [
-      0.087,
-      0.0871
+      84.5
     ],
-    "score": 65.2
+    "score": 55.9
+  },
+  "vs:ILVUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T21:01:34.327499+00:00",
+    "prices": [
+      3.1
+    ],
+    "score": 77.0
   }
 }
