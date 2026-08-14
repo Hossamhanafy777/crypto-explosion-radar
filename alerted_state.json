@@ -11,7 +11,7 @@
     "ceiling": 0.01013,
     "alert_price": 0.01144,
     "alert_time": "2026-08-13T13:17:17.065146+00:00",
-    "peak_price": 0.01145,
+    "peak_price": 0.01146,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -26,8 +26,13 @@
     "closed": false
   },
   "PLUMEUSDT:0.0132200000": {
-    "status": "pending",
-    "first_seen": "2026-08-14T07:46:05.047567+00:00",
-    "first_price": 0.01324
+    "status": "confirmed",
+    "symbol": "PLUMEUSDT",
+    "ceiling": 0.01322,
+    "alert_price": 0.01332,
+    "alert_time": "2026-08-14T08:16:14.305218+00:00",
+    "peak_price": 0.01334,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
