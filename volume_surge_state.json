@@ -126,12 +126,20 @@
     ],
     "score": 86.7
   },
-  "vs:REDUSDT": {
+  "vs:ILVUSDT": {
     "status": "pending",
-    "first_seen": "2026-08-14T18:10:54.147647+00:00",
+    "first_seen": "2026-08-14T18:16:06.508038+00:00",
     "prices": [
-      0.0877
+      3.16
     ],
-    "score": 65.1
+    "score": 74.0
+  },
+  "vs:BNSOLUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-14T18:16:06.508038+00:00",
+    "prices": [
+      84.4
+    ],
+    "score": 56.2
   }
 }

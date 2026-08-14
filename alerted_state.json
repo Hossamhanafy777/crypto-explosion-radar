@@ -35,11 +35,6 @@
     "weakness_alert_sent": false,
     "closed": true
   },
-  "ILVUSDT:3.1600000000": {
-    "status": "pending",
-    "first_seen": "2026-08-14T17:45:50.095032+00:00",
-    "first_price": 3.2
-  },
   "DOLOUSDT:0.0255700000": {
     "status": "pending",
     "first_seen": "2026-08-14T17:46:16.133711+00:00",
