@@ -36,8 +36,13 @@
     "closed": true
   },
   "DOLOUSDT:0.0255700000": {
-    "status": "pending",
-    "first_seen": "2026-08-14T17:46:16.133711+00:00",
-    "first_price": 0.03192
+    "status": "confirmed",
+    "symbol": "DOLOUSDT",
+    "ceiling": 0.02557,
+    "alert_price": 0.02997,
+    "alert_time": "2026-08-14T18:31:07.382745+00:00",
+    "peak_price": 0.02997,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
