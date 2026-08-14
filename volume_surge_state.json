@@ -131,9 +131,10 @@
     "first_seen": "2026-08-14T20:01:10.447020+00:00",
     "prices": [
       3.07,
-      3.08
+      3.08,
+      3.1
     ],
-    "score": 75.9
+    "score": 76.4
   },
   "vs:FTTUSDT": {
     "status": "pending",
@@ -143,21 +144,13 @@
     ],
     "score": 52.2
   },
-  "vs:REDUSDT": {
-    "status": "pending",
-    "first_seen": "2026-08-14T20:01:10.447020+00:00",
-    "prices": [
-      0.087,
-      0.087
-    ],
-    "score": 65.1
-  },
   "vs:BNSOLUSDT": {
     "status": "pending",
     "first_seen": "2026-08-14T20:05:01.384931+00:00",
     "prices": [
+      84.4,
       84.4
     ],
-    "score": 56.1
+    "score": 56.2
   }
 }
