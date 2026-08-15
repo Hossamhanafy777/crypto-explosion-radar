@@ -153,5 +153,13 @@
       2.5e-07
     ],
     "score": 39.3
+  },
+  "vs:FTTUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-15T08:03:22.266488+00:00",
+    "prices": [
+      0.2067
+    ],
+    "score": 55.4
   }
 }
