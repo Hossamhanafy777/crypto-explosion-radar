@@ -158,17 +158,19 @@
     "status": "pending",
     "first_seen": "2026-08-15T09:03:00.505400+00:00",
     "prices": [
-      0.208
+      0.208,
+      0.2085
     ],
-    "score": 56.3
+    "score": 56.5
   },
   "vs:COWUSDT": {
     "status": "pending",
     "first_seen": "2026-08-15T09:03:00.505400+00:00",
     "prices": [
-      0.1261
+      0.1261,
+      0.1477
     ],
-    "score": 71.8
+    "score": 87.0
   },
   "vs:HEMIUSDT": {
     "status": "pending",
