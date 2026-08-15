@@ -156,8 +156,25 @@
     "status": "pending",
     "first_seen": "2026-08-15T03:34:11.386004+00:00",
     "prices": [
-      0.2045
+      0.2045,
+      0.2055
     ],
-    "score": 51.8
+    "score": 52.4
+  },
+  "vs:BNSOLUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-15T03:46:04.805354+00:00",
+    "prices": [
+      84.9
+    ],
+    "score": 46.3
+  },
+  "vs:BTTCUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-15T03:46:04.805354+00:00",
+    "prices": [
+      2.5e-07
+    ],
+    "score": 43.6
   }
 }
