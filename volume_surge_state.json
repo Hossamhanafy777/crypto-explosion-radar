@@ -155,7 +155,27 @@
     "score": 39.3
   },
   "vs:FTTUSDT": {
-    "status": "confirmed",
-    "confirmed_at": "2026-08-15T08:46:02.858201+00:00"
+    "status": "pending",
+    "first_seen": "2026-08-15T09:03:00.505400+00:00",
+    "prices": [
+      0.208
+    ],
+    "score": 56.3
+  },
+  "vs:COWUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-15T09:03:00.505400+00:00",
+    "prices": [
+      0.1261
+    ],
+    "score": 71.8
+  },
+  "vs:HEMIUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-15T09:03:00.505400+00:00",
+    "prices": [
+      0.00585
+    ],
+    "score": 59.5
   }
 }
