@@ -12,9 +12,10 @@
     "status": "pending",
     "first_seen": "2026-08-15T00:46:30.214498+00:00",
     "prices": [
-      0.01273
+      0.01273,
+      0.01278
     ],
-    "score": 59.9
+    "score": 61.2
   },
   "vs:SCRTUSDT": {
     "status": "confirmed",
@@ -50,9 +51,10 @@
     "status": "pending",
     "first_seen": "2026-08-15T01:01:22.146477+00:00",
     "prices": [
+      2.6e-07,
       2.6e-07
     ],
-    "score": 45.7
+    "score": 46.1
   },
   "vs:MSTRBUSDT": {
     "status": "pending",
@@ -127,40 +129,24 @@
     ],
     "score": 40.9
   },
-  "vs:ONGUSDT": {
-    "status": "pending",
-    "first_seen": "2026-08-15T00:46:30.214498+00:00",
-    "prices": [
-      0.04455,
-      0.04515
-    ],
-    "score": 72.3
-  },
-  "vs:FTTUSDT": {
-    "status": "pending",
-    "first_seen": "2026-08-15T00:46:30.214498+00:00",
-    "prices": [
-      0.2067,
-      0.2068
-    ],
-    "score": 50.7
-  },
   "vs:AWEUSDT": {
     "status": "pending",
     "first_seen": "2026-08-15T00:46:30.214498+00:00",
     "prices": [
       0.06181,
-      0.06181
+      0.06181,
+      0.06193
     ],
-    "score": 39.9
+    "score": 40.5
   },
   "vs:ROBOUSDT": {
     "status": "pending",
     "first_seen": "2026-08-15T01:01:22.146477+00:00",
     "prices": [
-      0.01718
+      0.01718,
+      0.01746
     ],
-    "score": 43.8
+    "score": 45.7
   },
   "vs:ATUSDT": {
     "status": "pending",
@@ -169,5 +155,13 @@
       0.1658
     ],
     "score": 39.4
+  },
+  "vs:2ZUSDT": {
+    "status": "pending",
+    "first_seen": "2026-08-15T01:16:05.098907+00:00",
+    "prices": [
+      0.05254
+    ],
+    "score": 62.8
   }
 }
