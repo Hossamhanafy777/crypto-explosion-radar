@@ -142,9 +142,10 @@
     "first_seen": "2026-08-15T06:16:23.593464+00:00",
     "prices": [
       0.207,
-      0.2073
+      0.2073,
+      0.2079
     ],
-    "score": 55.0
+    "score": 55.4
   },
   "vs:WLFIUSDT": {
     "status": "pending",
@@ -155,23 +156,15 @@
     ],
     "score": 50.4
   },
-  "vs:BNSOLUSDT": {
-    "status": "pending",
-    "first_seen": "2026-08-15T06:16:23.593464+00:00",
-    "prices": [
-      84.8,
-      84.8
-    ],
-    "score": 40.9
-  },
   "vs:BTTCUSDT": {
     "status": "pending",
     "first_seen": "2026-08-15T06:16:23.593464+00:00",
     "prices": [
       2.5e-07,
+      2.6e-07,
       2.6e-07
     ],
-    "score": 42.7
+    "score": 39.2
   },
   "vs:GPSUSDT": {
     "status": "pending",
