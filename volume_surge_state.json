@@ -42,9 +42,10 @@
     "status": "pending",
     "first_seen": "2026-08-15T02:01:23.017530+00:00",
     "prices": [
+      2.6e-07,
       2.6e-07
     ],
-    "score": 45.1
+    "score": 45.3
   },
   "vs:MSTRBUSDT": {
     "status": "pending",
@@ -163,16 +164,15 @@
     "score": 72.8
   },
   "vs:FTTUSDT": {
-    "status": "confirmed",
-    "confirmed_at": "2026-08-15T02:01:23.017530+00:00"
+    "status": "pending",
+    "first_seen": "2026-08-15T02:16:25.686547+00:00",
+    "prices": [
+      0.2066
+    ],
+    "score": 51.3
   },
   "vs:PLUMEUSDT": {
-    "status": "pending",
-    "first_seen": "2026-08-15T01:46:03.561014+00:00",
-    "prices": [
-      0.01267,
-      0.01276
-    ],
-    "score": 62.9
+    "status": "confirmed",
+    "confirmed_at": "2026-08-15T02:16:25.686547+00:00"
   }
 }
