@@ -21,14 +21,6 @@
     ],
     "score": 69.2
   },
-  "vs:GPSUSDT": {
-    "status": "pending",
-    "first_seen": "2026-08-15T04:52:49.542103+00:00",
-    "prices": [
-      0.01063
-    ],
-    "score": 43.2
-  },
   "vs:NFLXBUSDT": {
     "status": "pending",
     "first_seen": "2026-08-14T17:06:06.162640+00:00",
@@ -66,9 +58,10 @@
     "prices": [
       0.0569,
       0.0572,
-      0.0572
+      0.0572,
+      0.0571
     ],
-    "score": 48.7
+    "score": 48.9
   },
   "vs:PIXELUSDT": {
     "status": "pending",
@@ -153,9 +146,10 @@
     "prices": [
       0.2064,
       0.2068,
-      0.207
+      0.207,
+      0.2075
     ],
-    "score": 54.7
+    "score": 54.8
   },
   "vs:BNSOLUSDT": {
     "status": "pending",
@@ -163,7 +157,8 @@
     "prices": [
       84.9,
       85.0,
-      85.1
+      85.1,
+      85.0
     ],
     "score": 45.0
   },
@@ -173,16 +168,18 @@
     "prices": [
       2.5e-07,
       2.5e-07,
+      2.5e-07,
       2.5e-07
     ],
-    "score": 41.2
+    "score": 42.8
   },
   "vs:DOLOUSDT": {
     "status": "pending",
     "first_seen": "2026-08-15T04:52:49.542103+00:00",
     "prices": [
-      0.02354
+      0.02354,
+      0.0237
     ],
-    "score": 79.2
+    "score": 80.1
   }
 }
