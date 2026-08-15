@@ -167,9 +167,10 @@
     "status": "pending",
     "first_seen": "2026-08-15T10:46:06.368301+00:00",
     "prices": [
-      0.2084
+      0.2084,
+      0.2092
     ],
-    "score": 58.1
+    "score": 58.4
   },
   "vs:WALUSDT": {
     "status": "pending",
@@ -179,21 +180,12 @@
     ],
     "score": 57.0
   },
-  "vs:TREEUSDT": {
+  "vs:ATUSDT": {
     "status": "pending",
-    "first_seen": "2026-08-15T10:31:20.634797+00:00",
+    "first_seen": "2026-08-15T10:51:47.322893+00:00",
     "prices": [
-      0.0337,
-      0.0338
+      0.1562
     ],
-    "score": 62.8
-  },
-  "vs:WCTUSDT": {
-    "status": "pending",
-    "first_seen": "2026-08-15T10:46:06.368301+00:00",
-    "prices": [
-      0.03494
-    ],
-    "score": 60.0
+    "score": 44.1
   }
 }
