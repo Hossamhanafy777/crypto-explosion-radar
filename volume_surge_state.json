@@ -38,14 +38,6 @@
     "status": "confirmed",
     "confirmed_at": "2026-08-15T00:16:05.881920+00:00"
   },
-  "vs:BTTCUSDT": {
-    "status": "pending",
-    "first_seen": "2026-08-15T02:47:47.624928+00:00",
-    "prices": [
-      2.6e-07
-    ],
-    "score": 45.3
-  },
   "vs:MSTRBUSDT": {
     "status": "pending",
     "first_seen": "2026-08-14T17:06:06.162640+00:00",
@@ -66,8 +58,12 @@
     "score": 86.7
   },
   "vs:BNSOLUSDT": {
-    "status": "confirmed",
-    "confirmed_at": "2026-08-15T02:47:47.624928+00:00"
+    "status": "pending",
+    "first_seen": "2026-08-15T03:01:34.335147+00:00",
+    "prices": [
+      85.1
+    ],
+    "score": 48.6
   },
   "vs:REDUSDT": {
     "status": "pending",
@@ -159,13 +155,5 @@
   "vs:PLUMEUSDT": {
     "status": "confirmed",
     "confirmed_at": "2026-08-15T02:16:25.686547+00:00"
-  },
-  "vs:FTTUSDT": {
-    "status": "pending",
-    "first_seen": "2026-08-15T02:47:47.624928+00:00",
-    "prices": [
-      0.207
-    ],
-    "score": 52.5
   }
 }
