@@ -44,5 +44,10 @@
     "peak_price": 0.02997,
     "weakness_alert_sent": false,
     "closed": true
+  },
+  "ILVUSDT:3.1600000000": {
+    "status": "pending",
+    "first_seen": "2026-08-15T00:00:48.266422+00:00",
+    "first_price": 3.2
   }
 }
