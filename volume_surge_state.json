@@ -22,8 +22,12 @@
     "score": 69.2
   },
   "vs:GPSUSDT": {
-    "status": "confirmed",
-    "confirmed_at": "2026-08-15T00:32:18.811146+00:00"
+    "status": "pending",
+    "first_seen": "2026-08-15T04:01:38.879081+00:00",
+    "prices": [
+      0.0106
+    ],
+    "score": 44.6
   },
   "vs:NFLXBUSDT": {
     "status": "pending",
@@ -157,24 +161,27 @@
     "first_seen": "2026-08-15T03:34:11.386004+00:00",
     "prices": [
       0.2045,
-      0.2055
+      0.2055,
+      0.2068
     ],
-    "score": 52.4
+    "score": 54.0
   },
   "vs:BNSOLUSDT": {
     "status": "pending",
     "first_seen": "2026-08-15T03:46:04.805354+00:00",
     "prices": [
+      84.9,
       84.9
     ],
-    "score": 46.3
+    "score": 46.0
   },
   "vs:BTTCUSDT": {
     "status": "pending",
     "first_seen": "2026-08-15T03:46:04.805354+00:00",
     "prices": [
-      2.5e-07
+      2.5e-07,
+      2.6e-07
     ],
-    "score": 43.6
+    "score": 43.3
   }
 }
