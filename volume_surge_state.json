@@ -62,9 +62,10 @@
     "first_seen": "2026-08-15T03:01:34.335147+00:00",
     "prices": [
       85.1,
-      85.1
+      85.1,
+      85.2
     ],
-    "score": 48.6
+    "score": 48.7
   },
   "vs:REDUSDT": {
     "status": "pending",
@@ -154,21 +155,18 @@
     "score": 72.8
   },
   "vs:PLUMEUSDT": {
-    "status": "confirmed",
-    "confirmed_at": "2026-08-15T02:16:25.686547+00:00"
-  },
-  "vs:FTTUSDT": {
     "status": "pending",
-    "first_seen": "2026-08-15T03:04:38.333844+00:00",
+    "first_seen": "2026-08-15T03:16:08.467514+00:00",
     "prices": [
-      0.2062
+      0.01326
     ],
-    "score": 51.8
+    "score": 69.9
   },
   "vs:BTTCUSDT": {
     "status": "pending",
     "first_seen": "2026-08-15T03:04:38.333844+00:00",
     "prices": [
+      2.6e-07,
       2.6e-07
     ],
     "score": 45.2
