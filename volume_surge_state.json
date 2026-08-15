@@ -137,15 +137,6 @@
     ],
     "score": 85.0
   },
-  "vs:FTTUSDT": {
-    "status": "pending",
-    "first_seen": "2026-08-15T07:16:15.709923+00:00",
-    "prices": [
-      0.2081,
-      0.2082
-    ],
-    "score": 55.5
-  },
   "vs:WLFIUSDT": {
     "status": "pending",
     "first_seen": "2026-08-15T06:16:23.593464+00:00",
@@ -154,14 +145,5 @@
       0.0567
     ],
     "score": 50.4
-  },
-  "vs:BTTCUSDT": {
-    "status": "pending",
-    "first_seen": "2026-08-15T07:16:15.709923+00:00",
-    "prices": [
-      2.5e-07,
-      2.6e-07
-    ],
-    "score": 40.6
   }
 }
