@@ -54,10 +54,5 @@
     "peak_price": 4.124,
     "weakness_alert_sent": false,
     "closed": true
-  },
-  "DUSKUSDT:0.0734000000": {
-    "status": "pending",
-    "first_seen": "2026-08-16T16:30:31.830897+00:00",
-    "first_price": 0.0736
   }
 }
