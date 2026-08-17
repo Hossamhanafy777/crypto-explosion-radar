@@ -54,5 +54,10 @@
     "peak_price": 4.124,
     "weakness_alert_sent": false,
     "closed": true
+  },
+  "COMPUSDT:17.6700000000": {
+    "status": "pending",
+    "first_seen": "2026-08-17T18:45:28.550391+00:00",
+    "first_price": 17.82
   }
 }
