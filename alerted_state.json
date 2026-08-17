@@ -56,8 +56,13 @@
     "closed": true
   },
   "COMPUSDT:17.6700000000": {
-    "status": "pending",
-    "first_seen": "2026-08-17T18:45:28.550391+00:00",
-    "first_price": 17.82
+    "status": "confirmed",
+    "symbol": "COMPUSDT",
+    "ceiling": 17.67,
+    "alert_price": 18.0,
+    "alert_time": "2026-08-17T19:15:30.441035+00:00",
+    "peak_price": 18.06,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
