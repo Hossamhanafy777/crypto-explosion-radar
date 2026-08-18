@@ -66,8 +66,13 @@
     "closed": true
   },
   "MORPHOUSDT:2.1760000000": {
-    "status": "pending",
-    "first_seen": "2026-08-18T12:16:10.127834+00:00",
-    "first_price": 2.179
+    "status": "confirmed",
+    "symbol": "MORPHOUSDT",
+    "ceiling": 2.176,
+    "alert_price": 2.183,
+    "alert_time": "2026-08-18T12:46:29.293710+00:00",
+    "peak_price": 2.183,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
