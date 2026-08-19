@@ -81,7 +81,7 @@
     "ceiling": 1.531,
     "alert_price": 1.542,
     "alert_time": "2026-08-19T08:15:49.064616+00:00",
-    "peak_price": 1.567,
+    "peak_price": 1.574,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -89,5 +89,15 @@
     "status": "pending",
     "first_seen": "2026-08-19T15:15:58.840901+00:00",
     "first_price": 91.7
+  },
+  "ETHUSDT:1981.2400000000": {
+    "status": "pending",
+    "first_seen": "2026-08-19T15:30:26.011484+00:00",
+    "first_price": 2069.6
+  },
+  "SOLUSDT:78.8800000000": {
+    "status": "pending",
+    "first_seen": "2026-08-19T15:30:38.118702+00:00",
+    "first_price": 81.74
   }
 }
