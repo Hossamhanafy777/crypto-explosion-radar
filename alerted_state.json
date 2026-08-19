@@ -81,7 +81,7 @@
     "ceiling": 1.531,
     "alert_price": 1.542,
     "alert_time": "2026-08-19T08:15:49.064616+00:00",
-    "peak_price": 1.632,
+    "peak_price": 1.636,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -121,7 +121,7 @@
     "ceiling": 66956.15,
     "alert_price": 68044.78,
     "alert_time": "2026-08-19T17:45:21.162440+00:00",
-    "peak_price": 69827.99,
+    "peak_price": 69869.38,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -131,7 +131,7 @@
     "ceiling": 557.77,
     "alert_price": 569.96,
     "alert_time": "2026-08-19T21:30:28.322687+00:00",
-    "peak_price": 570.4,
+    "peak_price": 572.26,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -146,9 +146,14 @@
     "closed": false
   },
   "BNBUSDT:620.5500000000": {
-    "status": "pending",
-    "first_seen": "2026-08-19T21:15:16.248954+00:00",
-    "first_price": 628.16
+    "status": "confirmed",
+    "symbol": "BNBUSDT",
+    "ceiling": 620.55,
+    "alert_price": 634.52,
+    "alert_time": "2026-08-19T21:45:23.789550+00:00",
+    "peak_price": 635.76,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "BNTUSDT:0.2906000000": {
     "status": "pending",
