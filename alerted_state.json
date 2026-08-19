@@ -81,7 +81,7 @@
     "ceiling": 1.531,
     "alert_price": 1.542,
     "alert_time": "2026-08-19T08:15:49.064616+00:00",
-    "peak_price": 1.599,
+    "peak_price": 1.608,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -91,7 +91,7 @@
     "ceiling": 88.5,
     "alert_price": 92.4,
     "alert_time": "2026-08-19T15:51:30.941220+00:00",
-    "peak_price": 92.9,
+    "peak_price": 94.2,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -101,7 +101,7 @@
     "ceiling": 1981.24,
     "alert_price": 2088.52,
     "alert_time": "2026-08-19T16:00:29.860273+00:00",
-    "peak_price": 2125.6,
+    "peak_price": 2219.82,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -111,7 +111,7 @@
     "ceiling": 78.88,
     "alert_price": 81.86,
     "alert_time": "2026-08-19T16:00:43.358985+00:00",
-    "peak_price": 82.65,
+    "peak_price": 83.92,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -121,8 +121,18 @@
     "ceiling": 66956.15,
     "alert_price": 68044.78,
     "alert_time": "2026-08-19T17:45:21.162440+00:00",
-    "peak_price": 68717.99,
+    "peak_price": 69048.23,
     "weakness_alert_sent": false,
     "closed": false
+  },
+  "ZECUSDT:557.7700000000": {
+    "status": "pending",
+    "first_seen": "2026-08-19T20:59:31.910716+00:00",
+    "first_price": 559.78
+  },
+  "DOGEUSDT:0.0740400000": {
+    "status": "pending",
+    "first_seen": "2026-08-19T20:59:35.737334+00:00",
+    "first_price": 0.07419
   }
 }
