@@ -114,5 +114,10 @@
     "peak_price": 82.03,
     "weakness_alert_sent": false,
     "closed": false
+  },
+  "BTCUSDT:66956.1500000000": {
+    "status": "pending",
+    "first_seen": "2026-08-19T17:15:21.129582+00:00",
+    "first_price": 68249.99
   }
 }
