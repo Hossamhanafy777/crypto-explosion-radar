@@ -131,7 +131,7 @@
     "ceiling": 557.77,
     "alert_price": 569.96,
     "alert_time": "2026-08-19T21:30:28.322687+00:00",
-    "peak_price": 572.26,
+    "peak_price": 574.27,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -156,13 +156,23 @@
     "closed": false
   },
   "BNTUSDT:0.2906000000": {
-    "status": "pending",
-    "first_seen": "2026-08-19T21:15:33.448982+00:00",
-    "first_price": 0.2979
+    "status": "confirmed",
+    "symbol": "BNTUSDT",
+    "ceiling": 0.2906,
+    "alert_price": 0.3007,
+    "alert_time": "2026-08-19T21:56:15.212485+00:00",
+    "peak_price": 0.3007,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "TRUMPUSDT:1.6700000000": {
-    "status": "pending",
-    "first_seen": "2026-08-19T21:16:20.936914+00:00",
-    "first_price": 1.69
+    "status": "confirmed",
+    "symbol": "TRUMPUSDT",
+    "ceiling": 1.67,
+    "alert_price": 1.688,
+    "alert_time": "2026-08-19T21:57:01.493105+00:00",
+    "peak_price": 1.688,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
