@@ -81,7 +81,7 @@
     "ceiling": 1.531,
     "alert_price": 1.542,
     "alert_time": "2026-08-19T08:15:49.064616+00:00",
-    "peak_price": 1.608,
+    "peak_price": 1.622,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -91,7 +91,7 @@
     "ceiling": 88.5,
     "alert_price": 92.4,
     "alert_time": "2026-08-19T15:51:30.941220+00:00",
-    "peak_price": 94.2,
+    "peak_price": 96.7,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -101,7 +101,7 @@
     "ceiling": 1981.24,
     "alert_price": 2088.52,
     "alert_time": "2026-08-19T16:00:29.860273+00:00",
-    "peak_price": 2219.82,
+    "peak_price": 2264.1,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -111,7 +111,7 @@
     "ceiling": 78.88,
     "alert_price": 81.86,
     "alert_time": "2026-08-19T16:00:43.358985+00:00",
-    "peak_price": 83.92,
+    "peak_price": 86.05,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -121,7 +121,7 @@
     "ceiling": 66956.15,
     "alert_price": 68044.78,
     "alert_time": "2026-08-19T17:45:21.162440+00:00",
-    "peak_price": 69048.23,
+    "peak_price": 69361.13,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -134,5 +134,20 @@
     "status": "pending",
     "first_seen": "2026-08-19T20:59:35.737334+00:00",
     "first_price": 0.07419
+  },
+  "BNBUSDT:620.5500000000": {
+    "status": "pending",
+    "first_seen": "2026-08-19T21:15:16.248954+00:00",
+    "first_price": 628.16
+  },
+  "BNTUSDT:0.2906000000": {
+    "status": "pending",
+    "first_seen": "2026-08-19T21:15:33.448982+00:00",
+    "first_price": 0.2979
+  },
+  "TRUMPUSDT:1.6700000000": {
+    "status": "pending",
+    "first_seen": "2026-08-19T21:16:20.936914+00:00",
+    "first_price": 1.69
   }
 }
