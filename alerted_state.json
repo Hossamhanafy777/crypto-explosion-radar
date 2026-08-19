@@ -114,10 +114,5 @@
     "peak_price": 82.03,
     "weakness_alert_sent": false,
     "closed": false
-  },
-  "BIOUSDT:0.0287700000": {
-    "status": "pending",
-    "first_seen": "2026-08-19T16:01:24.338718+00:00",
-    "first_price": 0.02883
   }
 }
