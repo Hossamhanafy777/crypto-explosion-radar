@@ -86,9 +86,14 @@
     "closed": false
   },
   "BNSOLUSDT:88.5000000000": {
-    "status": "pending",
-    "first_seen": "2026-08-19T15:15:58.840901+00:00",
-    "first_price": 91.7
+    "status": "confirmed",
+    "symbol": "BNSOLUSDT",
+    "ceiling": 88.5,
+    "alert_price": 92.4,
+    "alert_time": "2026-08-19T15:51:30.941220+00:00",
+    "peak_price": 92.4,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "ETHUSDT:1981.2400000000": {
     "status": "pending",
