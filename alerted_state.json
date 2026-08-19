@@ -74,5 +74,10 @@
     "peak_price": 2.189,
     "weakness_alert_sent": false,
     "closed": true
+  },
+  "CAKEUSDT:1.5310000000": {
+    "status": "pending",
+    "first_seen": "2026-08-19T07:45:37.704918+00:00",
+    "first_price": 1.541
   }
 }
