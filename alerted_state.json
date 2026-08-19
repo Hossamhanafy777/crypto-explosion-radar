@@ -96,13 +96,28 @@
     "closed": false
   },
   "ETHUSDT:1981.2400000000": {
-    "status": "pending",
-    "first_seen": "2026-08-19T15:30:26.011484+00:00",
-    "first_price": 2069.6
+    "status": "confirmed",
+    "symbol": "ETHUSDT",
+    "ceiling": 1981.24,
+    "alert_price": 2088.52,
+    "alert_time": "2026-08-19T16:00:29.860273+00:00",
+    "peak_price": 2088.52,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "SOLUSDT:78.8800000000": {
+    "status": "confirmed",
+    "symbol": "SOLUSDT",
+    "ceiling": 78.88,
+    "alert_price": 81.86,
+    "alert_time": "2026-08-19T16:00:43.358985+00:00",
+    "peak_price": 81.86,
+    "weakness_alert_sent": false,
+    "closed": false
+  },
+  "BIOUSDT:0.0287700000": {
     "status": "pending",
-    "first_seen": "2026-08-19T15:30:38.118702+00:00",
-    "first_price": 81.74
+    "first_seen": "2026-08-19T16:01:24.338718+00:00",
+    "first_price": 0.02883
   }
 }
