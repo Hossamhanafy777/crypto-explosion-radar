@@ -121,7 +121,7 @@
     "ceiling": 66956.15,
     "alert_price": 68044.78,
     "alert_time": "2026-08-19T17:45:21.162440+00:00",
-    "peak_price": 71974.23,
+    "peak_price": 72237.84,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -141,7 +141,7 @@
     "ceiling": 0.07404,
     "alert_price": 0.07625,
     "alert_time": "2026-08-19T21:30:32.448896+00:00",
-    "peak_price": 0.07701,
+    "peak_price": 0.07718,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -151,7 +151,7 @@
     "ceiling": 620.55,
     "alert_price": 634.52,
     "alert_time": "2026-08-19T21:45:23.789550+00:00",
-    "peak_price": 643.48,
+    "peak_price": 644.48,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -211,7 +211,7 @@
     "ceiling": 0.0461,
     "alert_price": 0.0487,
     "alert_time": "2026-08-20T06:46:07.543059+00:00",
-    "peak_price": 0.0509,
+    "peak_price": 0.051,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -244,5 +244,10 @@
     "peak_price": 0.0914,
     "weakness_alert_sent": false,
     "closed": false
+  },
+  "TAOUSDT:210.8000000000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T10:16:03.640806+00:00",
+    "first_price": 210.9
   }
 }
