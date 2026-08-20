@@ -286,8 +286,13 @@
     "closed": false
   },
   "PENGUUSDT:0.0069180000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T11:31:11.757850+00:00",
-    "first_price": 0.006974
+    "status": "confirmed",
+    "symbol": "PENGUUSDT",
+    "ceiling": 0.006918,
+    "alert_price": 0.007242,
+    "alert_time": "2026-08-20T12:15:59.411724+00:00",
+    "peak_price": 0.007245,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
