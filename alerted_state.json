@@ -141,7 +141,7 @@
     "ceiling": 0.07404,
     "alert_price": 0.07625,
     "alert_time": "2026-08-19T21:30:32.448896+00:00",
-    "peak_price": 0.07801,
+    "peak_price": 0.0784,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -191,7 +191,7 @@
     "ceiling": 18.5,
     "alert_price": 18.78,
     "alert_time": "2026-08-20T03:45:29.703519+00:00",
-    "peak_price": 19.16,
+    "peak_price": 19.23,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -301,13 +301,8 @@
     "ceiling": 0.005014,
     "alert_price": 0.005051,
     "alert_time": "2026-08-20T14:45:22.549046+00:00",
-    "peak_price": 0.005051,
+    "peak_price": 0.005078,
     "weakness_alert_sent": false,
     "closed": false
-  },
-  "TRXUSDT:0.3385000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T14:45:21.543085+00:00",
-    "first_price": 0.3386
   }
 }
