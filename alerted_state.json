@@ -243,7 +243,7 @@
     "alert_time": "2026-08-20T10:00:48.403734+00:00",
     "peak_price": 0.0914,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "TAOUSDT:210.8000000000": {
     "status": "confirmed",
@@ -253,16 +253,31 @@
     "alert_time": "2026-08-20T11:01:11.930236+00:00",
     "peak_price": 211.4,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "ORDIUSDT:4.1090000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T10:31:08.480123+00:00",
-    "first_price": 4.222
+    "status": "confirmed",
+    "symbol": "ORDIUSDT",
+    "ceiling": 4.109,
+    "alert_price": 4.221,
+    "alert_time": "2026-08-20T11:15:51.142373+00:00",
+    "peak_price": 4.234,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "ENAUSDT:0.0982000000": {
+    "status": "confirmed",
+    "symbol": "ENAUSDT",
+    "ceiling": 0.0982,
+    "alert_price": 0.101,
+    "alert_time": "2026-08-20T11:15:54.744977+00:00",
+    "peak_price": 0.101,
+    "weakness_alert_sent": false,
+    "closed": false
+  },
+  "THETAUSDT:0.1478000000": {
     "status": "pending",
-    "first_seen": "2026-08-20T10:45:46.730949+00:00",
-    "first_price": 0.0995
+    "first_seen": "2026-08-20T11:15:23.736490+00:00",
+    "first_price": 0.1609
   }
 }
