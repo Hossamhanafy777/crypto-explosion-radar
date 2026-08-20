@@ -151,7 +151,7 @@
     "ceiling": 620.55,
     "alert_price": 634.52,
     "alert_time": "2026-08-19T21:45:23.789550+00:00",
-    "peak_price": 644.48,
+    "peak_price": 644.7,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -254,5 +254,10 @@
     "status": "pending",
     "first_seen": "2026-08-20T10:31:08.480123+00:00",
     "first_price": 4.222
+  },
+  "ENAUSDT:0.0982000000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T10:45:46.730949+00:00",
+    "first_price": 0.0995
   }
 }
