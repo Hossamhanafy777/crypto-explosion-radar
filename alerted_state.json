@@ -271,7 +271,7 @@
     "ceiling": 0.0982,
     "alert_price": 0.101,
     "alert_time": "2026-08-20T11:15:54.744977+00:00",
-    "peak_price": 0.1033,
+    "peak_price": 0.1048,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -311,7 +311,7 @@
     "ceiling": 6.987,
     "alert_price": 7.041,
     "alert_time": "2026-08-20T15:45:36.006308+00:00",
-    "peak_price": 7.222,
+    "peak_price": 7.238,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -341,7 +341,7 @@
     "ceiling": 1.945,
     "alert_price": 1.977,
     "alert_time": "2026-08-20T16:45:39.488166+00:00",
-    "peak_price": 1.994,
+    "peak_price": 2.002,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -371,19 +371,34 @@
     "first_price": 0.1807
   },
   "FLOKIUSDT:0.0000233600": {
-    "status": "pending",
-    "first_seen": "2026-08-20T16:45:47.487313+00:00",
-    "first_price": 2.343e-05
+    "status": "confirmed",
+    "symbol": "FLOKIUSDT",
+    "ceiling": 2.336e-05,
+    "alert_price": 2.338e-05,
+    "alert_time": "2026-08-20T17:15:49.783897+00:00",
+    "peak_price": 2.339e-05,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "WIFUSDT:0.1616000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T16:45:52.180584+00:00",
-    "first_price": 0.1617
+    "status": "confirmed",
+    "symbol": "WIFUSDT",
+    "ceiling": 0.1616,
+    "alert_price": 0.1619,
+    "alert_time": "2026-08-20T17:15:56.408020+00:00",
+    "peak_price": 0.1619,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "TURBOUSDT:0.0009070000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T16:45:55.947263+00:00",
-    "first_price": 0.000909
+    "status": "confirmed",
+    "symbol": "TURBOUSDT",
+    "ceiling": 0.000907,
+    "alert_price": 0.00091,
+    "alert_time": "2026-08-20T17:16:01.559380+00:00",
+    "peak_price": 0.00091,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "LTCUSDT:48.2800000000": {
     "status": "pending",
