@@ -294,10 +294,5 @@
     "peak_price": 0.007245,
     "weakness_alert_sent": false,
     "closed": false
-  },
-  "VETUSDT:0.0050140000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T13:00:30.046005+00:00",
-    "first_price": 0.00502
   }
 }
