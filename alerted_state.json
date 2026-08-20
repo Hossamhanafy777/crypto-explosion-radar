@@ -333,7 +333,7 @@
     "alert_time": "2026-08-20T16:45:24.291755+00:00",
     "peak_price": 0.3402,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "ARUSDT:1.9450000000": {
     "status": "confirmed",
