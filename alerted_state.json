@@ -121,7 +121,7 @@
     "ceiling": 66956.15,
     "alert_price": 68044.78,
     "alert_time": "2026-08-19T17:45:21.162440+00:00",
-    "peak_price": 72834.01,
+    "peak_price": 72835.38,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -421,8 +421,13 @@
     "ceiling": 0.04339,
     "alert_price": 0.04392,
     "alert_time": "2026-08-20T18:15:24.390085+00:00",
-    "peak_price": 0.04619,
+    "peak_price": 0.05953,
     "weakness_alert_sent": false,
     "closed": false
+  },
+  "QTUMUSDT:0.7430000000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T20:30:29.563651+00:00",
+    "first_price": 0.813
   }
 }
