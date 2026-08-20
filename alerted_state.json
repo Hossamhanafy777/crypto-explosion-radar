@@ -161,7 +161,7 @@
     "ceiling": 0.2906,
     "alert_price": 0.3007,
     "alert_time": "2026-08-19T21:56:15.212485+00:00",
-    "peak_price": 0.3016,
+    "peak_price": 0.3024,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -221,13 +221,18 @@
     "ceiling": 0.02877,
     "alert_price": 0.03002,
     "alert_time": "2026-08-20T07:01:21.764616+00:00",
-    "peak_price": 0.03277,
+    "peak_price": 0.0333,
     "weakness_alert_sent": false,
     "closed": false
   },
   "PEPEUSDT:0.0000031000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T08:30:51.526367+00:00",
-    "first_price": 3.14e-06
+    "status": "confirmed",
+    "symbol": "PEPEUSDT",
+    "ceiling": 3.1e-06,
+    "alert_price": 3.2e-06,
+    "alert_time": "2026-08-20T09:00:53.086102+00:00",
+    "peak_price": 3.2e-06,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
