@@ -201,14 +201,19 @@
     "ceiling": 0.641,
     "alert_price": 0.654,
     "alert_time": "2026-08-20T05:46:01.015862+00:00",
-    "peak_price": 0.654,
+    "peak_price": 0.658,
     "weakness_alert_sent": false,
     "closed": false
   },
   "PNUTUSDT:0.0461000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T06:04:42.921781+00:00",
-    "first_price": 0.0474
+    "status": "confirmed",
+    "symbol": "PNUTUSDT",
+    "ceiling": 0.0461,
+    "alert_price": 0.0487,
+    "alert_time": "2026-08-20T06:46:07.543059+00:00",
+    "peak_price": 0.0488,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "BIOUSDT:0.0287700000": {
     "status": "pending",
