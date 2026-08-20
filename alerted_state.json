@@ -211,7 +211,7 @@
     "ceiling": 0.0461,
     "alert_price": 0.0487,
     "alert_time": "2026-08-20T06:46:07.543059+00:00",
-    "peak_price": 0.0524,
+    "peak_price": 0.0528,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -281,7 +281,7 @@
     "ceiling": 0.1478,
     "alert_price": 0.161,
     "alert_time": "2026-08-20T11:45:23.918053+00:00",
-    "peak_price": 0.161,
+    "peak_price": 0.1625,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -294,5 +294,10 @@
     "peak_price": 0.007245,
     "weakness_alert_sent": false,
     "closed": false
+  },
+  "VETUSDT:0.0050140000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T14:00:33.081292+00:00",
+    "first_price": 0.005062
   }
 }
