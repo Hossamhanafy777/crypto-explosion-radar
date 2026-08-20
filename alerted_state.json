@@ -211,7 +211,7 @@
     "ceiling": 0.0461,
     "alert_price": 0.0487,
     "alert_time": "2026-08-20T06:46:07.543059+00:00",
-    "peak_price": 0.0499,
+    "peak_price": 0.0504,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -233,11 +233,16 @@
     "alert_time": "2026-08-20T09:00:53.086102+00:00",
     "peak_price": 3.2e-06,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "SUPERUSDT:0.0911000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T09:30:39.971696+00:00",
-    "first_price": 0.0913
+    "status": "confirmed",
+    "symbol": "SUPERUSDT",
+    "ceiling": 0.0911,
+    "alert_price": 0.0914,
+    "alert_time": "2026-08-20T10:00:48.403734+00:00",
+    "peak_price": 0.0914,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
