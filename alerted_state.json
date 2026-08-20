@@ -81,7 +81,7 @@
     "ceiling": 1.531,
     "alert_price": 1.542,
     "alert_time": "2026-08-19T08:15:49.064616+00:00",
-    "peak_price": 1.644,
+    "peak_price": 1.645,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -271,7 +271,7 @@
     "ceiling": 0.0982,
     "alert_price": 0.101,
     "alert_time": "2026-08-20T11:15:54.744977+00:00",
-    "peak_price": 0.1134,
+    "peak_price": 0.1138,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -341,7 +341,7 @@
     "ceiling": 1.945,
     "alert_price": 1.977,
     "alert_time": "2026-08-20T16:45:39.488166+00:00",
-    "peak_price": 2.005,
+    "peak_price": 2.02,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -436,8 +436,13 @@
     "closed": false
   },
   "SANTOSUSDT:0.5240000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T21:23:44.760833+00:00",
-    "first_price": 0.543
+    "status": "confirmed",
+    "symbol": "SANTOSUSDT",
+    "ceiling": 0.524,
+    "alert_price": 0.72,
+    "alert_time": "2026-08-20T22:00:51.151710+00:00",
+    "peak_price": 0.72,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
