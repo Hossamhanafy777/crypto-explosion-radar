@@ -101,7 +101,7 @@
     "ceiling": 1981.24,
     "alert_price": 2088.52,
     "alert_time": "2026-08-19T16:00:29.860273+00:00",
-    "peak_price": 2313.96,
+    "peak_price": 2314.34,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -151,7 +151,7 @@
     "ceiling": 620.55,
     "alert_price": 634.52,
     "alert_time": "2026-08-19T21:45:23.789550+00:00",
-    "peak_price": 648.59,
+    "peak_price": 648.69,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -271,7 +271,7 @@
     "ceiling": 0.0982,
     "alert_price": 0.101,
     "alert_time": "2026-08-20T11:15:54.744977+00:00",
-    "peak_price": 0.1019,
+    "peak_price": 0.1023,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -311,7 +311,7 @@
     "ceiling": 6.987,
     "alert_price": 7.041,
     "alert_time": "2026-08-20T15:45:36.006308+00:00",
-    "peak_price": 7.045,
+    "peak_price": 7.046,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -321,13 +321,13 @@
     "ceiling": 2.4,
     "alert_price": 2.418,
     "alert_time": "2026-08-20T15:45:53.554670+00:00",
-    "peak_price": 2.419,
+    "peak_price": 2.423,
     "weakness_alert_sent": false,
     "closed": false
   },
-  "TURBOUSDT:0.0009070000": {
+  "SUSHIUSDT:0.1794000000": {
     "status": "pending",
-    "first_seen": "2026-08-20T15:46:05.082801+00:00",
-    "first_price": 0.000908
+    "first_seen": "2026-08-20T15:48:44.241993+00:00",
+    "first_price": 0.1795
   }
 }
