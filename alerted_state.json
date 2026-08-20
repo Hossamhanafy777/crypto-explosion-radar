@@ -101,7 +101,7 @@
     "ceiling": 1981.24,
     "alert_price": 2088.52,
     "alert_time": "2026-08-19T16:00:29.860273+00:00",
-    "peak_price": 2320.97,
+    "peak_price": 2322.7,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -141,7 +141,7 @@
     "ceiling": 0.07404,
     "alert_price": 0.07625,
     "alert_time": "2026-08-19T21:30:32.448896+00:00",
-    "peak_price": 0.07986,
+    "peak_price": 0.08011,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -151,7 +151,7 @@
     "ceiling": 620.55,
     "alert_price": 634.52,
     "alert_time": "2026-08-19T21:45:23.789550+00:00",
-    "peak_price": 650.91,
+    "peak_price": 651.09,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -301,7 +301,7 @@
     "ceiling": 0.005014,
     "alert_price": 0.005051,
     "alert_time": "2026-08-20T14:45:22.549046+00:00",
-    "peak_price": 0.005108,
+    "peak_price": 0.005123,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -334,5 +334,15 @@
     "status": "pending",
     "first_seen": "2026-08-20T16:00:50.265365+00:00",
     "first_price": 1.953
+  },
+  "ZENUSDT:4.3530000000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T16:15:29.067008+00:00",
+    "first_price": 4.38
+  },
+  "XPLUSDT:0.0878800000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T16:16:10.998942+00:00",
+    "first_price": 0.08795
   }
 }
