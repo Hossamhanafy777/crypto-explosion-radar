@@ -296,8 +296,18 @@
     "closed": false
   },
   "VETUSDT:0.0050140000": {
+    "status": "confirmed",
+    "symbol": "VETUSDT",
+    "ceiling": 0.005014,
+    "alert_price": 0.005051,
+    "alert_time": "2026-08-20T14:45:22.549046+00:00",
+    "peak_price": 0.005051,
+    "weakness_alert_sent": false,
+    "closed": false
+  },
+  "TRXUSDT:0.3385000000": {
     "status": "pending",
-    "first_seen": "2026-08-20T14:00:33.081292+00:00",
-    "first_price": 0.005062
+    "first_seen": "2026-08-20T14:45:21.543085+00:00",
+    "first_price": 0.3386
   }
 }
