@@ -363,7 +363,7 @@
     "alert_time": "2026-08-20T17:01:20.790327+00:00",
     "peak_price": 0.09033,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "SUSHIUSDT:0.1794000000": {
     "status": "confirmed",
@@ -383,7 +383,7 @@
     "alert_time": "2026-08-20T17:15:49.783897+00:00",
     "peak_price": 2.351e-05,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "WIFUSDT:0.1616000000": {
     "status": "confirmed",
@@ -393,7 +393,7 @@
     "alert_time": "2026-08-20T17:15:56.408020+00:00",
     "peak_price": 0.1644,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "TURBOUSDT:0.0009070000": {
     "status": "confirmed",
@@ -419,10 +419,5 @@
     "status": "pending",
     "first_seen": "2026-08-20T17:44:35.001867+00:00",
     "first_price": 0.04372
-  },
-  "LTCUSDT:48.2800000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T18:00:28.237598+00:00",
-    "first_price": 48.37
   }
 }
