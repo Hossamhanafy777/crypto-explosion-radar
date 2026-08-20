@@ -373,7 +373,7 @@
     "alert_time": "2026-08-20T17:30:35.790205+00:00",
     "peak_price": 0.1815,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "FLOKIUSDT:0.0000233600": {
     "status": "confirmed",
