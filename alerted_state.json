@@ -121,7 +121,7 @@
     "ceiling": 66956.15,
     "alert_price": 68044.78,
     "alert_time": "2026-08-19T17:45:21.162440+00:00",
-    "peak_price": 72237.84,
+    "peak_price": 72344.0,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -141,7 +141,7 @@
     "ceiling": 0.07404,
     "alert_price": 0.07625,
     "alert_time": "2026-08-19T21:30:32.448896+00:00",
-    "peak_price": 0.0784,
+    "peak_price": 0.07892,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -191,7 +191,7 @@
     "ceiling": 18.5,
     "alert_price": 18.78,
     "alert_time": "2026-08-20T03:45:29.703519+00:00",
-    "peak_price": 19.23,
+    "peak_price": 19.31,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -211,7 +211,7 @@
     "ceiling": 0.0461,
     "alert_price": 0.0487,
     "alert_time": "2026-08-20T06:46:07.543059+00:00",
-    "peak_price": 0.0528,
+    "peak_price": 0.053,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -281,7 +281,7 @@
     "ceiling": 0.1478,
     "alert_price": 0.161,
     "alert_time": "2026-08-20T11:45:23.918053+00:00",
-    "peak_price": 0.1625,
+    "peak_price": 0.1638,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -301,8 +301,23 @@
     "ceiling": 0.005014,
     "alert_price": 0.005051,
     "alert_time": "2026-08-20T14:45:22.549046+00:00",
-    "peak_price": 0.005078,
+    "peak_price": 0.005105,
     "weakness_alert_sent": false,
     "closed": false
+  },
+  "TRXUSDT:0.3385000000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T15:04:09.583284+00:00",
+    "first_price": 0.3387
+  },
+  "AVAXUSDT:6.9870000000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T15:04:18.342040+00:00",
+    "first_price": 7.015
+  },
+  "ARUSDT:1.9450000000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T15:04:24.259290+00:00",
+    "first_price": 1.952
   }
 }
