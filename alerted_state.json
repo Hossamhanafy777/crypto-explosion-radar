@@ -141,7 +141,7 @@
     "ceiling": 0.07404,
     "alert_price": 0.07625,
     "alert_time": "2026-08-19T21:30:32.448896+00:00",
-    "peak_price": 0.07718,
+    "peak_price": 0.07722,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -249,5 +249,10 @@
     "status": "pending",
     "first_seen": "2026-08-20T10:16:03.640806+00:00",
     "first_price": 210.9
+  },
+  "ORDIUSDT:4.1090000000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T10:31:08.480123+00:00",
+    "first_price": 4.222
   }
 }
