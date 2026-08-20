@@ -305,24 +305,29 @@
     "weakness_alert_sent": false,
     "closed": false
   },
-  "TRXUSDT:0.3385000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T15:04:09.583284+00:00",
-    "first_price": 0.3387
-  },
   "AVAXUSDT:6.9870000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T15:04:18.342040+00:00",
-    "first_price": 7.015
-  },
-  "ARUSDT:1.9450000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T15:04:24.259290+00:00",
-    "first_price": 1.952
+    "status": "confirmed",
+    "symbol": "AVAXUSDT",
+    "ceiling": 6.987,
+    "alert_price": 7.041,
+    "alert_time": "2026-08-20T15:45:36.006308+00:00",
+    "peak_price": 7.045,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "SSVUSDT:2.4000000000": {
+    "status": "confirmed",
+    "symbol": "SSVUSDT",
+    "ceiling": 2.4,
+    "alert_price": 2.418,
+    "alert_time": "2026-08-20T15:45:53.554670+00:00",
+    "peak_price": 2.419,
+    "weakness_alert_sent": false,
+    "closed": false
+  },
+  "TURBOUSDT:0.0009070000": {
     "status": "pending",
-    "first_seen": "2026-08-20T15:15:52.532126+00:00",
-    "first_price": 2.407
+    "first_seen": "2026-08-20T15:46:05.082801+00:00",
+    "first_price": 0.000908
   }
 }
