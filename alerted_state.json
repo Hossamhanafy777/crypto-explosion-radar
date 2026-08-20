@@ -416,8 +416,13 @@
     "closed": false
   },
   "ONTUSDT:0.0433900000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T17:44:35.001867+00:00",
-    "first_price": 0.04372
+    "status": "confirmed",
+    "symbol": "ONTUSDT",
+    "ceiling": 0.04339,
+    "alert_price": 0.04392,
+    "alert_time": "2026-08-20T18:15:24.390085+00:00",
+    "peak_price": 0.04392,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
