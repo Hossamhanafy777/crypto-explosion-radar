@@ -261,7 +261,7 @@
     "ceiling": 4.109,
     "alert_price": 4.221,
     "alert_time": "2026-08-20T11:15:51.142373+00:00",
-    "peak_price": 4.318,
+    "peak_price": 4.354,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -271,7 +271,7 @@
     "ceiling": 0.0982,
     "alert_price": 0.101,
     "alert_time": "2026-08-20T11:15:54.744977+00:00",
-    "peak_price": 0.101,
+    "peak_price": 0.1012,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -279,5 +279,10 @@
     "status": "pending",
     "first_seen": "2026-08-20T11:15:23.736490+00:00",
     "first_price": 0.1609
+  },
+  "PENGUUSDT:0.0069180000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T11:31:11.757850+00:00",
+    "first_price": 0.006974
   }
 }
