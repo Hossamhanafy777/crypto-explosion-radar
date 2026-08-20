@@ -141,7 +141,7 @@
     "ceiling": 0.07404,
     "alert_price": 0.07625,
     "alert_time": "2026-08-19T21:30:32.448896+00:00",
-    "peak_price": 0.07722,
+    "peak_price": 0.07723,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -246,9 +246,14 @@
     "closed": false
   },
   "TAOUSDT:210.8000000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T10:16:03.640806+00:00",
-    "first_price": 210.9
+    "status": "confirmed",
+    "symbol": "TAOUSDT",
+    "ceiling": 210.8,
+    "alert_price": 211.3,
+    "alert_time": "2026-08-20T11:01:11.930236+00:00",
+    "peak_price": 211.4,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "ORDIUSDT:4.1090000000": {
     "status": "pending",
