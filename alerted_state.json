@@ -196,8 +196,18 @@
     "closed": false
   },
   "ASTERUSDT:0.6410000000": {
+    "status": "confirmed",
+    "symbol": "ASTERUSDT",
+    "ceiling": 0.641,
+    "alert_price": 0.654,
+    "alert_time": "2026-08-20T05:46:01.015862+00:00",
+    "peak_price": 0.654,
+    "weakness_alert_sent": false,
+    "closed": false
+  },
+  "BIOUSDT:0.0287700000": {
     "status": "pending",
-    "first_seen": "2026-08-20T05:01:30.871231+00:00",
-    "first_price": 0.649
+    "first_seen": "2026-08-20T05:45:54.042329+00:00",
+    "first_price": 0.02881
   }
 }
