@@ -442,7 +442,7 @@
     "alert_price": 0.72,
     "alert_time": "2026-08-20T22:00:51.151710+00:00",
     "peak_price": 0.72,
-    "weakness_alert_sent": false,
+    "weakness_alert_sent": true,
     "closed": false
   }
 }
