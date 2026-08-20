@@ -189,5 +189,10 @@
     "status": "pending",
     "first_seen": "2026-08-20T03:00:45.001719+00:00",
     "first_price": 18.6
+  },
+  "BIOUSDT:0.0287700000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T03:31:21.696319+00:00",
+    "first_price": 0.0288
   }
 }
