@@ -151,7 +151,7 @@
     "ceiling": 620.55,
     "alert_price": 634.52,
     "alert_time": "2026-08-19T21:45:23.789550+00:00",
-    "peak_price": 655.53,
+    "peak_price": 656.28,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -161,7 +161,7 @@
     "ceiling": 0.2906,
     "alert_price": 0.3007,
     "alert_time": "2026-08-19T21:56:15.212485+00:00",
-    "peak_price": 0.3064,
+    "peak_price": 0.3066,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -271,7 +271,7 @@
     "ceiling": 0.0982,
     "alert_price": 0.101,
     "alert_time": "2026-08-20T11:15:54.744977+00:00",
-    "peak_price": 0.1163,
+    "peak_price": 0.1176,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -444,5 +444,10 @@
     "peak_price": 0.72,
     "weakness_alert_sent": true,
     "closed": false
+  },
+  "RSRUSDT:0.0013400000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T23:21:08.639883+00:00",
+    "first_price": 0.001353
   }
 }
