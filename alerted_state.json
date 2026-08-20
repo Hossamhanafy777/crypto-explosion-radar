@@ -174,5 +174,10 @@
     "peak_price": 1.808,
     "weakness_alert_sent": false,
     "closed": false
+  },
+  "MORPHOUSDT:2.2020000000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T00:01:24.898734+00:00",
+    "first_price": 2.213
   }
 }
