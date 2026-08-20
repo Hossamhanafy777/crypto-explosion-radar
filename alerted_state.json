@@ -81,7 +81,7 @@
     "ceiling": 1.531,
     "alert_price": 1.542,
     "alert_time": "2026-08-19T08:15:49.064616+00:00",
-    "peak_price": 1.636,
+    "peak_price": 1.638,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -101,7 +101,7 @@
     "ceiling": 1981.24,
     "alert_price": 2088.52,
     "alert_time": "2026-08-19T16:00:29.860273+00:00",
-    "peak_price": 2322.7,
+    "peak_price": 2343.8,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -121,7 +121,7 @@
     "ceiling": 66956.15,
     "alert_price": 68044.78,
     "alert_time": "2026-08-19T17:45:21.162440+00:00",
-    "peak_price": 72505.82,
+    "peak_price": 72638.0,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -141,7 +141,7 @@
     "ceiling": 0.07404,
     "alert_price": 0.07625,
     "alert_time": "2026-08-19T21:30:32.448896+00:00",
-    "peak_price": 0.08041,
+    "peak_price": 0.08176,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -151,7 +151,7 @@
     "ceiling": 620.55,
     "alert_price": 634.52,
     "alert_time": "2026-08-19T21:45:23.789550+00:00",
-    "peak_price": 651.09,
+    "peak_price": 652.9,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -161,7 +161,7 @@
     "ceiling": 0.2906,
     "alert_price": 0.3007,
     "alert_time": "2026-08-19T21:56:15.212485+00:00",
-    "peak_price": 0.3058,
+    "peak_price": 0.3064,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -201,7 +201,7 @@
     "ceiling": 0.641,
     "alert_price": 0.654,
     "alert_time": "2026-08-20T05:46:01.015862+00:00",
-    "peak_price": 0.673,
+    "peak_price": 0.678,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -291,7 +291,7 @@
     "ceiling": 0.006918,
     "alert_price": 0.007242,
     "alert_time": "2026-08-20T12:15:59.411724+00:00",
-    "peak_price": 0.007245,
+    "peak_price": 0.007276,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -301,7 +301,7 @@
     "ceiling": 0.005014,
     "alert_price": 0.005051,
     "alert_time": "2026-08-20T14:45:22.549046+00:00",
-    "peak_price": 0.005123,
+    "peak_price": 0.005139,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -311,7 +311,7 @@
     "ceiling": 6.987,
     "alert_price": 7.041,
     "alert_time": "2026-08-20T15:45:36.006308+00:00",
-    "peak_price": 7.116,
+    "peak_price": 7.211,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -326,23 +326,58 @@
     "closed": true
   },
   "TRXUSDT:0.3385000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T16:00:32.183836+00:00",
-    "first_price": 0.3386
+    "status": "confirmed",
+    "symbol": "TRXUSDT",
+    "ceiling": 0.3385,
+    "alert_price": 0.3394,
+    "alert_time": "2026-08-20T16:45:24.291755+00:00",
+    "peak_price": 0.3396,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "ARUSDT:1.9450000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T16:00:50.265365+00:00",
-    "first_price": 1.953
+    "status": "confirmed",
+    "symbol": "ARUSDT",
+    "ceiling": 1.945,
+    "alert_price": 1.977,
+    "alert_time": "2026-08-20T16:45:39.488166+00:00",
+    "peak_price": 1.981,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "ZENUSDT:4.3530000000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T16:15:29.067008+00:00",
-    "first_price": 4.38
+    "status": "confirmed",
+    "symbol": "ZENUSDT",
+    "ceiling": 4.353,
+    "alert_price": 4.425,
+    "alert_time": "2026-08-20T16:45:29.979228+00:00",
+    "peak_price": 4.434,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "XPLUSDT:0.0878800000": {
     "status": "pending",
     "first_seen": "2026-08-20T16:16:10.998942+00:00",
     "first_price": 0.08795
+  },
+  "SUSHIUSDT:0.1794000000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T16:45:31.902805+00:00",
+    "first_price": 0.1807
+  },
+  "FLOKIUSDT:0.0000233600": {
+    "status": "pending",
+    "first_seen": "2026-08-20T16:45:47.487313+00:00",
+    "first_price": 2.343e-05
+  },
+  "WIFUSDT:0.1616000000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T16:45:52.180584+00:00",
+    "first_price": 0.1617
+  },
+  "TURBOUSDT:0.0009070000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T16:45:55.947263+00:00",
+    "first_price": 0.000909
   }
 }
