@@ -141,7 +141,7 @@
     "ceiling": 0.07404,
     "alert_price": 0.07625,
     "alert_time": "2026-08-19T21:30:32.448896+00:00",
-    "peak_price": 0.07892,
+    "peak_price": 0.07951,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -191,7 +191,7 @@
     "ceiling": 18.5,
     "alert_price": 18.78,
     "alert_time": "2026-08-20T03:45:29.703519+00:00",
-    "peak_price": 19.31,
+    "peak_price": 19.35,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -319,5 +319,15 @@
     "status": "pending",
     "first_seen": "2026-08-20T15:04:24.259290+00:00",
     "first_price": 1.952
+  },
+  "SSVUSDT:2.4000000000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T15:15:52.532126+00:00",
+    "first_price": 2.407
+  },
+  "XPLUSDT:0.0878800000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T15:16:12.840086+00:00",
+    "first_price": 0.08792
   }
 }
