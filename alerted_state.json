@@ -191,8 +191,13 @@
     "ceiling": 18.5,
     "alert_price": 18.78,
     "alert_time": "2026-08-20T03:45:29.703519+00:00",
-    "peak_price": 18.78,
+    "peak_price": 18.95,
     "weakness_alert_sent": false,
     "closed": false
+  },
+  "BIOUSDT:0.0287700000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T04:01:12.903232+00:00",
+    "first_price": 0.02893
   }
 }
