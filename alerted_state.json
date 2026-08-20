@@ -422,7 +422,7 @@
     "alert_price": 0.04392,
     "alert_time": "2026-08-20T18:15:24.390085+00:00",
     "peak_price": 0.06313,
-    "weakness_alert_sent": false,
+    "weakness_alert_sent": true,
     "closed": false
   },
   "QTUMUSDT:0.7430000000": {
