@@ -434,5 +434,10 @@
     "peak_price": 0.805,
     "weakness_alert_sent": false,
     "closed": false
+  },
+  "SANTOSUSDT:0.5240000000": {
+    "status": "pending",
+    "first_seen": "2026-08-20T21:23:44.760833+00:00",
+    "first_price": 0.543
   }
 }
