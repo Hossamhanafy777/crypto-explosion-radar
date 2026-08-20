@@ -263,7 +263,7 @@
     "alert_time": "2026-08-20T11:15:51.142373+00:00",
     "peak_price": 4.44,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "ENAUSDT:0.0982000000": {
     "status": "confirmed",
@@ -271,7 +271,7 @@
     "ceiling": 0.0982,
     "alert_price": 0.101,
     "alert_time": "2026-08-20T11:15:54.744977+00:00",
-    "peak_price": 0.11,
+    "peak_price": 0.1121,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -331,7 +331,7 @@
     "ceiling": 0.3385,
     "alert_price": 0.3394,
     "alert_time": "2026-08-20T16:45:24.291755+00:00",
-    "peak_price": 0.3401,
+    "peak_price": 0.3402,
     "weakness_alert_sent": false,
     "closed": false
   },
