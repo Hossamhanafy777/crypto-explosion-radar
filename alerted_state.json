@@ -311,7 +311,7 @@
     "ceiling": 6.987,
     "alert_price": 7.041,
     "alert_time": "2026-08-20T15:45:36.006308+00:00",
-    "peak_price": 7.288,
+    "peak_price": 7.3,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -446,8 +446,13 @@
     "closed": false
   },
   "RSRUSDT:0.0013400000": {
-    "status": "pending",
-    "first_seen": "2026-08-20T23:21:08.639883+00:00",
-    "first_price": 0.001353
+    "status": "confirmed",
+    "symbol": "RSRUSDT",
+    "ceiling": 0.00134,
+    "alert_price": 0.001354,
+    "alert_time": "2026-08-21T00:00:33.310648+00:00",
+    "peak_price": 0.001354,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
