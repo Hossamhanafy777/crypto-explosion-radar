@@ -576,9 +576,14 @@
     "closed": false
   },
   "OPUSDT:0.0991000000": {
-    "status": "pending",
-    "first_seen": "2026-08-21T08:30:39.405651+00:00",
-    "first_price": 0.0995
+    "status": "confirmed",
+    "symbol": "OPUSDT",
+    "ceiling": 0.0991,
+    "alert_price": 0.1006,
+    "alert_time": "2026-08-21T09:00:48.751498+00:00",
+    "peak_price": 0.1006,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "DASHUSDT:35.2000000000": {
     "status": "pending",
@@ -594,15 +599,5 @@
     "status": "pending",
     "first_seen": "2026-08-21T08:57:48.904298+00:00",
     "first_price": 0.02082
-  },
-  "VIRTUALUSDT:0.6815000000": {
-    "status": "pending",
-    "first_seen": "2026-08-21T08:57:51.887812+00:00",
-    "first_price": 0.6841
-  },
-  "PLUMEUSDT:0.0143500000": {
-    "status": "pending",
-    "first_seen": "2026-08-21T08:57:56.234052+00:00",
-    "first_price": 0.01449
   }
 }
