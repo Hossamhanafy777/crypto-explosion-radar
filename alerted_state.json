@@ -161,7 +161,7 @@
     "ceiling": 0.2906,
     "alert_price": 0.3007,
     "alert_time": "2026-08-19T21:56:15.212485+00:00",
-    "peak_price": 0.3085,
+    "peak_price": 0.3091,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -271,7 +271,7 @@
     "ceiling": 0.0982,
     "alert_price": 0.101,
     "alert_time": "2026-08-20T11:15:54.744977+00:00",
-    "peak_price": 0.1183,
+    "peak_price": 0.1196,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -451,13 +451,18 @@
     "ceiling": 0.00134,
     "alert_price": 0.001354,
     "alert_time": "2026-08-21T00:00:33.310648+00:00",
-    "peak_price": 0.001366,
+    "peak_price": 0.001367,
     "weakness_alert_sent": false,
     "closed": false
   },
   "AXSUSDT:0.9440000000": {
-    "status": "pending",
-    "first_seen": "2026-08-21T00:15:31.761926+00:00",
-    "first_price": 0.966
+    "status": "confirmed",
+    "symbol": "AXSUSDT",
+    "ceiling": 0.944,
+    "alert_price": 0.967,
+    "alert_time": "2026-08-21T01:00:35.297881+00:00",
+    "peak_price": 0.967,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
