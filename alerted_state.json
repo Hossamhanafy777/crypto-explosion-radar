@@ -311,7 +311,7 @@
     "ceiling": 6.987,
     "alert_price": 7.041,
     "alert_time": "2026-08-20T15:45:36.006308+00:00",
-    "peak_price": 7.309,
+    "peak_price": 7.314,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -466,8 +466,18 @@
     "closed": false
   },
   "LTCUSDT:48.2800000000": {
+    "status": "confirmed",
+    "symbol": "LTCUSDT",
+    "ceiling": 48.28,
+    "alert_price": 48.37,
+    "alert_time": "2026-08-21T04:00:25.766228+00:00",
+    "peak_price": 48.4,
+    "weakness_alert_sent": false,
+    "closed": false
+  },
+  "TFUELUSDT:0.0081800000": {
     "status": "pending",
-    "first_seen": "2026-08-21T03:30:23.693176+00:00",
-    "first_price": 48.29
+    "first_seen": "2026-08-21T04:00:28.429191+00:00",
+    "first_price": 0.0082
   }
 }
