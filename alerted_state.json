@@ -503,7 +503,7 @@
     "alert_time": "2026-08-21T06:45:51.087019+00:00",
     "peak_price": 4.221e-05,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "ICPUSDT:2.3970000000": {
     "status": "confirmed",
@@ -553,7 +553,7 @@
     "alert_time": "2026-08-21T08:45:21.674092+00:00",
     "peak_price": 0.076,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "DOTUSDT:0.8700000000": {
     "status": "confirmed",
@@ -573,7 +573,7 @@
     "alert_time": "2026-08-21T08:45:35.837863+00:00",
     "peak_price": 0.8097,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "OPUSDT:0.0991000000": {
     "status": "confirmed",
@@ -583,21 +583,11 @@
     "alert_time": "2026-08-21T09:00:48.751498+00:00",
     "peak_price": 0.1006,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
-  "DASHUSDT:35.2000000000": {
+  "MASKUSDT:0.3970000000": {
     "status": "pending",
-    "first_seen": "2026-08-21T08:57:18.233781+00:00",
-    "first_price": 35.44
-  },
-  "RAYUSDT:0.7280000000": {
-    "status": "pending",
-    "first_seen": "2026-08-21T08:57:33.062784+00:00",
-    "first_price": 0.731
-  },
-  "AIXBTUSDT:0.0206000000": {
-    "status": "pending",
-    "first_seen": "2026-08-21T08:57:48.904298+00:00",
-    "first_price": 0.02082
+    "first_seen": "2026-08-21T09:15:25.905437+00:00",
+    "first_price": 0.413
   }
 }
