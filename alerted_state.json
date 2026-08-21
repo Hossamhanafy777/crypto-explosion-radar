@@ -101,7 +101,7 @@
     "ceiling": 1981.24,
     "alert_price": 2088.52,
     "alert_time": "2026-08-19T16:00:29.860273+00:00",
-    "peak_price": 2440.98,
+    "peak_price": 2442.45,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -161,7 +161,7 @@
     "ceiling": 0.2906,
     "alert_price": 0.3007,
     "alert_time": "2026-08-19T21:56:15.212485+00:00",
-    "peak_price": 0.3267,
+    "peak_price": 0.3273,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -351,7 +351,7 @@
     "ceiling": 4.353,
     "alert_price": 4.425,
     "alert_time": "2026-08-20T16:45:29.979228+00:00",
-    "peak_price": 4.937,
+    "peak_price": 4.942,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -471,7 +471,7 @@
     "ceiling": 48.28,
     "alert_price": 48.37,
     "alert_time": "2026-08-21T04:00:25.766228+00:00",
-    "peak_price": 52.14,
+    "peak_price": 52.15,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -541,7 +541,7 @@
     "ceiling": 0.00652,
     "alert_price": 0.00654,
     "alert_time": "2026-08-21T08:15:37.571642+00:00",
-    "peak_price": 0.0069,
+    "peak_price": 0.00692,
     "weakness_alert_sent": false,
     "closed": false
   },
