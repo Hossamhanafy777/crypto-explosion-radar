@@ -311,7 +311,7 @@
     "ceiling": 6.987,
     "alert_price": 7.041,
     "alert_time": "2026-08-20T15:45:36.006308+00:00",
-    "peak_price": 7.314,
+    "peak_price": 7.316,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -471,13 +471,8 @@
     "ceiling": 48.28,
     "alert_price": 48.37,
     "alert_time": "2026-08-21T04:00:25.766228+00:00",
-    "peak_price": 48.43,
+    "peak_price": 48.48,
     "weakness_alert_sent": false,
     "closed": false
-  },
-  "TFUELUSDT:0.0081800000": {
-    "status": "pending",
-    "first_seen": "2026-08-21T04:00:28.429191+00:00",
-    "first_price": 0.0082
   }
 }
