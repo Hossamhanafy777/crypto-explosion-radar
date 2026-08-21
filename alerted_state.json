@@ -351,7 +351,7 @@
     "ceiling": 4.353,
     "alert_price": 4.425,
     "alert_time": "2026-08-20T16:45:29.979228+00:00",
-    "peak_price": 4.583,
+    "peak_price": 4.593,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -461,7 +461,7 @@
     "ceiling": 0.944,
     "alert_price": 0.967,
     "alert_time": "2026-08-21T01:00:35.297881+00:00",
-    "peak_price": 0.977,
+    "peak_price": 0.978,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -486,14 +486,24 @@
     "closed": true
   },
   "ROSEUSDT:0.0059400000": {
-    "status": "pending",
-    "first_seen": "2026-08-21T06:15:28.284806+00:00",
-    "first_price": 0.00604
+    "status": "confirmed",
+    "symbol": "ROSEUSDT",
+    "ceiling": 0.00594,
+    "alert_price": 0.00609,
+    "alert_time": "2026-08-21T06:45:32.119577+00:00",
+    "peak_price": 0.00609,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "DOGSUSDT:0.0000409000": {
-    "status": "pending",
-    "first_seen": "2026-08-21T06:15:49.178975+00:00",
-    "first_price": 4.115e-05
+    "status": "confirmed",
+    "symbol": "DOGSUSDT",
+    "ceiling": 4.09e-05,
+    "alert_price": 4.115e-05,
+    "alert_time": "2026-08-21T06:45:51.087019+00:00",
+    "peak_price": 4.115e-05,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "ICPUSDT:2.3970000000": {
     "status": "pending",
