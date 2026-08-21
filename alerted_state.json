@@ -281,7 +281,7 @@
     "ceiling": 0.1478,
     "alert_price": 0.161,
     "alert_time": "2026-08-20T11:45:23.918053+00:00",
-    "peak_price": 0.1693,
+    "peak_price": 0.1704,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -589,5 +589,10 @@
     "status": "pending",
     "first_seen": "2026-08-21T09:15:25.905437+00:00",
     "first_price": 0.413
+  },
+  "RUNEUSDT:0.4580000000": {
+    "status": "pending",
+    "first_seen": "2026-08-21T09:30:27.258924+00:00",
+    "first_price": 0.469
   }
 }
