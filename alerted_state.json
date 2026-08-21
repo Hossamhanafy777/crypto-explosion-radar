@@ -81,7 +81,7 @@
     "ceiling": 1.531,
     "alert_price": 1.542,
     "alert_time": "2026-08-19T08:15:49.064616+00:00",
-    "peak_price": 1.694,
+    "peak_price": 1.697,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -121,7 +121,7 @@
     "ceiling": 66956.15,
     "alert_price": 68044.78,
     "alert_time": "2026-08-19T17:45:21.162440+00:00",
-    "peak_price": 76443.17,
+    "peak_price": 76526.01,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -141,7 +141,7 @@
     "ceiling": 0.07404,
     "alert_price": 0.07625,
     "alert_time": "2026-08-19T21:30:32.448896+00:00",
-    "peak_price": 0.0841,
+    "peak_price": 0.08443,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -201,7 +201,7 @@
     "ceiling": 0.641,
     "alert_price": 0.654,
     "alert_time": "2026-08-20T05:46:01.015862+00:00",
-    "peak_price": 0.683,
+    "peak_price": 0.69,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -271,7 +271,7 @@
     "ceiling": 0.0982,
     "alert_price": 0.101,
     "alert_time": "2026-08-20T11:15:54.744977+00:00",
-    "peak_price": 0.1329,
+    "peak_price": 0.134,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -281,7 +281,7 @@
     "ceiling": 0.1478,
     "alert_price": 0.161,
     "alert_time": "2026-08-20T11:45:23.918053+00:00",
-    "peak_price": 0.1659,
+    "peak_price": 0.1664,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -291,7 +291,7 @@
     "ceiling": 0.006918,
     "alert_price": 0.007242,
     "alert_time": "2026-08-20T12:15:59.411724+00:00",
-    "peak_price": 0.00754,
+    "peak_price": 0.0076,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -301,7 +301,7 @@
     "ceiling": 0.005014,
     "alert_price": 0.005051,
     "alert_time": "2026-08-20T14:45:22.549046+00:00",
-    "peak_price": 0.005327,
+    "peak_price": 0.005341,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -311,7 +311,7 @@
     "ceiling": 6.987,
     "alert_price": 7.041,
     "alert_time": "2026-08-20T15:45:36.006308+00:00",
-    "peak_price": 7.482,
+    "peak_price": 7.488,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -341,7 +341,7 @@
     "ceiling": 1.945,
     "alert_price": 1.977,
     "alert_time": "2026-08-20T16:45:39.488166+00:00",
-    "peak_price": 2.094,
+    "peak_price": 2.096,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -351,7 +351,7 @@
     "ceiling": 4.353,
     "alert_price": 4.425,
     "alert_time": "2026-08-20T16:45:29.979228+00:00",
-    "peak_price": 4.654,
+    "peak_price": 4.688,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -401,7 +401,7 @@
     "ceiling": 0.000907,
     "alert_price": 0.00091,
     "alert_time": "2026-08-20T17:16:01.559380+00:00",
-    "peak_price": 0.000978,
+    "peak_price": 0.000994,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -461,7 +461,7 @@
     "ceiling": 0.944,
     "alert_price": 0.967,
     "alert_time": "2026-08-21T01:00:35.297881+00:00",
-    "peak_price": 0.989,
+    "peak_price": 0.993,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -471,7 +471,7 @@
     "ceiling": 48.28,
     "alert_price": 48.37,
     "alert_time": "2026-08-21T04:00:25.766228+00:00",
-    "peak_price": 49.33,
+    "peak_price": 49.55,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -491,7 +491,7 @@
     "ceiling": 0.00594,
     "alert_price": 0.00609,
     "alert_time": "2026-08-21T06:45:32.119577+00:00",
-    "peak_price": 0.00612,
+    "peak_price": 0.00614,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -501,7 +501,7 @@
     "ceiling": 4.09e-05,
     "alert_price": 4.115e-05,
     "alert_time": "2026-08-21T06:45:51.087019+00:00",
-    "peak_price": 4.136e-05,
+    "peak_price": 4.139e-05,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -511,7 +511,7 @@
     "ceiling": 2.397,
     "alert_price": 2.412,
     "alert_time": "2026-08-21T07:00:40.059029+00:00",
-    "peak_price": 2.439,
+    "peak_price": 2.458,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -524,5 +524,20 @@
     "peak_price": 0.09182,
     "weakness_alert_sent": false,
     "closed": false
+  },
+  "AAVEUSDT:102.5400000000": {
+    "status": "pending",
+    "first_seen": "2026-08-21T07:45:24.126986+00:00",
+    "first_price": 102.75
+  },
+  "SUIUSDT:0.7796000000": {
+    "status": "pending",
+    "first_seen": "2026-08-21T07:45:33.237671+00:00",
+    "first_price": 0.7811
+  },
+  "ALTUSDT:0.0065200000": {
+    "status": "pending",
+    "first_seen": "2026-08-21T07:45:36.864054+00:00",
+    "first_price": 0.00655
   }
 }
