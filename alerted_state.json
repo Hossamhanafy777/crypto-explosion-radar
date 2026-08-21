@@ -281,7 +281,7 @@
     "ceiling": 0.1478,
     "alert_price": 0.161,
     "alert_time": "2026-08-20T11:45:23.918053+00:00",
-    "peak_price": 0.173,
+    "peak_price": 0.1735,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -491,7 +491,7 @@
     "ceiling": 0.00594,
     "alert_price": 0.00609,
     "alert_time": "2026-08-21T06:45:32.119577+00:00",
-    "peak_price": 0.00627,
+    "peak_price": 0.00631,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -586,9 +586,14 @@
     "closed": true
   },
   "MASKUSDT:0.3970000000": {
-    "status": "pending",
-    "first_seen": "2026-08-21T09:15:25.905437+00:00",
-    "first_price": 0.413
+    "status": "confirmed",
+    "symbol": "MASKUSDT",
+    "ceiling": 0.397,
+    "alert_price": 0.421,
+    "alert_time": "2026-08-21T09:45:31.509577+00:00",
+    "peak_price": 0.421,
+    "weakness_alert_sent": false,
+    "closed": false
   },
   "RUNEUSDT:0.4580000000": {
     "status": "pending",
