@@ -352,7 +352,7 @@
     "alert_price": 4.425,
     "alert_time": "2026-08-20T16:45:29.979228+00:00",
     "peak_price": 6.022,
-    "weakness_alert_sent": false,
+    "weakness_alert_sent": true,
     "closed": false
   },
   "XPLUSDT:0.0878800000": {
@@ -513,7 +513,7 @@
     "alert_time": "2026-08-21T07:00:40.059029+00:00",
     "peak_price": 2.694,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "POLUSDT:0.0849000000": {
     "status": "confirmed",
