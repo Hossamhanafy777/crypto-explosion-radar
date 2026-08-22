@@ -151,7 +151,7 @@
     "ceiling": 620.55,
     "alert_price": 634.52,
     "alert_time": "2026-08-19T21:45:23.789550+00:00",
-    "peak_price": 723.48,
+    "peak_price": 725.15,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -161,7 +161,7 @@
     "ceiling": 0.2906,
     "alert_price": 0.3007,
     "alert_time": "2026-08-19T21:56:15.212485+00:00",
-    "peak_price": 0.3393,
+    "peak_price": 0.3411,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -191,7 +191,7 @@
     "ceiling": 18.5,
     "alert_price": 18.78,
     "alert_time": "2026-08-20T03:45:29.703519+00:00",
-    "peak_price": 20.66,
+    "peak_price": 20.81,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -211,7 +211,7 @@
     "ceiling": 0.0461,
     "alert_price": 0.0487,
     "alert_time": "2026-08-20T06:46:07.543059+00:00",
-    "peak_price": 0.0602,
+    "peak_price": 0.0617,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -221,7 +221,7 @@
     "ceiling": 0.02877,
     "alert_price": 0.03002,
     "alert_time": "2026-08-20T07:01:21.764616+00:00",
-    "peak_price": 0.03391,
+    "peak_price": 0.03458,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -281,7 +281,7 @@
     "ceiling": 0.1478,
     "alert_price": 0.161,
     "alert_time": "2026-08-20T11:45:23.918053+00:00",
-    "peak_price": 0.201,
+    "peak_price": 0.2032,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -291,7 +291,7 @@
     "ceiling": 0.006918,
     "alert_price": 0.007242,
     "alert_time": "2026-08-20T12:15:59.411724+00:00",
-    "peak_price": 0.009286,
+    "peak_price": 0.009295,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -301,7 +301,7 @@
     "ceiling": 0.005014,
     "alert_price": 0.005051,
     "alert_time": "2026-08-20T14:45:22.549046+00:00",
-    "peak_price": 0.006096,
+    "peak_price": 0.006168,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -311,7 +311,7 @@
     "ceiling": 6.987,
     "alert_price": 7.041,
     "alert_time": "2026-08-20T15:45:36.006308+00:00",
-    "peak_price": 8.25,
+    "peak_price": 8.275,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -341,7 +341,7 @@
     "ceiling": 1.945,
     "alert_price": 1.977,
     "alert_time": "2026-08-20T16:45:39.488166+00:00",
-    "peak_price": 2.392,
+    "peak_price": 2.393,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -401,7 +401,7 @@
     "ceiling": 0.000907,
     "alert_price": 0.00091,
     "alert_time": "2026-08-20T17:16:01.559380+00:00",
-    "peak_price": 0.001112,
+    "peak_price": 0.001113,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -471,7 +471,7 @@
     "ceiling": 48.28,
     "alert_price": 48.37,
     "alert_time": "2026-08-21T04:00:25.766228+00:00",
-    "peak_price": 55.05,
+    "peak_price": 55.09,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -491,7 +491,7 @@
     "ceiling": 0.00594,
     "alert_price": 0.00609,
     "alert_time": "2026-08-21T06:45:32.119577+00:00",
-    "peak_price": 0.00714,
+    "peak_price": 0.00715,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -521,7 +521,7 @@
     "ceiling": 0.0849,
     "alert_price": 0.09162,
     "alert_time": "2026-08-21T07:15:47.327083+00:00",
-    "peak_price": 0.10752,
+    "peak_price": 0.11136,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -541,7 +541,7 @@
     "ceiling": 0.00652,
     "alert_price": 0.00654,
     "alert_time": "2026-08-21T08:15:37.571642+00:00",
-    "peak_price": 0.00711,
+    "peak_price": 0.00717,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -591,7 +591,7 @@
     "ceiling": 0.397,
     "alert_price": 0.421,
     "alert_time": "2026-08-21T09:45:31.509577+00:00",
-    "peak_price": 0.454,
+    "peak_price": 0.459,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -606,7 +606,7 @@
     "ceiling": 3.05,
     "alert_price": 3.31,
     "alert_time": "2026-08-22T03:00:34.053511+00:00",
-    "peak_price": 3.34,
+    "peak_price": 3.37,
     "weakness_alert_sent": false,
     "closed": false
   }
