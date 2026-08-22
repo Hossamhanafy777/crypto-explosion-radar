@@ -543,7 +543,7 @@
     "alert_time": "2026-08-21T08:15:37.571642+00:00",
     "peak_price": 0.00717,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "DUSKUSDT:0.0743000000": {
     "status": "confirmed",
