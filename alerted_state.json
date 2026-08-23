@@ -223,7 +223,7 @@
     "alert_time": "2026-08-20T07:01:21.764616+00:00",
     "peak_price": 0.03458,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "PEPEUSDT:0.0000031000": {
     "status": "confirmed",
@@ -493,7 +493,7 @@
     "alert_time": "2026-08-21T06:45:32.119577+00:00",
     "peak_price": 0.00715,
     "weakness_alert_sent": true,
-    "closed": false
+    "closed": true
   },
   "DOGSUSDT:0.0000409000": {
     "status": "confirmed",
@@ -608,6 +608,6 @@
     "alert_time": "2026-08-22T03:00:34.053511+00:00",
     "peak_price": 3.37,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   }
 }
