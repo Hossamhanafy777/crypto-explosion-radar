@@ -203,7 +203,7 @@
     "alert_time": "2026-08-20T05:46:01.015862+00:00",
     "peak_price": 0.765,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "PNUTUSDT:0.0461000000": {
     "status": "confirmed",
