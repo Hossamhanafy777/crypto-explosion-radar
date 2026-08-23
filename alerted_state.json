@@ -492,7 +492,7 @@
     "alert_price": 0.00609,
     "alert_time": "2026-08-21T06:45:32.119577+00:00",
     "peak_price": 0.00715,
-    "weakness_alert_sent": false,
+    "weakness_alert_sent": true,
     "closed": false
   },
   "DOGSUSDT:0.0000409000": {
