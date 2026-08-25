@@ -291,7 +291,7 @@
     "ceiling": 0.006918,
     "alert_price": 0.007242,
     "alert_time": "2026-08-20T12:15:59.411724+00:00",
-    "peak_price": 0.010462,
+    "peak_price": 0.0105,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -521,7 +521,7 @@
     "ceiling": 0.0849,
     "alert_price": 0.09162,
     "alert_time": "2026-08-21T07:15:47.327083+00:00",
-    "peak_price": 0.11884,
+    "peak_price": 0.1201,
     "weakness_alert_sent": false,
     "closed": false
   },
