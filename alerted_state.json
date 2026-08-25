@@ -563,7 +563,7 @@
     "alert_time": "2026-08-21T08:45:24.939291+00:00",
     "peak_price": 1.03,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "SUIUSDT:0.7796000000": {
     "status": "confirmed",
