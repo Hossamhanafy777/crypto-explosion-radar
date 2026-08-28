@@ -193,7 +193,7 @@
     "alert_time": "2026-08-20T03:45:29.703519+00:00",
     "peak_price": 21.53,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "ASTERUSDT:0.6410000000": {
     "status": "confirmed",
