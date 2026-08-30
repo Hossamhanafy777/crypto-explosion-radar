@@ -453,7 +453,7 @@
     "alert_time": "2026-08-21T00:00:33.310648+00:00",
     "peak_price": 0.001588,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "AXSUSDT:0.9440000000": {
     "status": "confirmed",
@@ -473,7 +473,7 @@
     "alert_time": "2026-08-21T04:00:25.766228+00:00",
     "peak_price": 55.09,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "TFUELUSDT:0.0081800000": {
     "status": "confirmed",
