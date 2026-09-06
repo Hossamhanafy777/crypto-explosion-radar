@@ -609,5 +609,11 @@
     "peak_price": 3.37,
     "weakness_alert_sent": false,
     "closed": true
+  },
+  "FIDAUSDT:0.0217500000": {
+    "status": "pending",
+    "first_seen": "2026-09-06T21:00:30.064400+00:00",
+    "first_price": 0.02361,
+    "factor_score": 4
   }
 }
