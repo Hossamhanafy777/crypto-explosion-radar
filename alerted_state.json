@@ -611,9 +611,13 @@
     "closed": true
   },
   "FIDAUSDT:0.0217500000": {
-    "status": "pending",
-    "first_seen": "2026-09-06T21:00:30.064400+00:00",
-    "first_price": 0.02361,
-    "factor_score": 4
+    "status": "confirmed",
+    "symbol": "FIDAUSDT",
+    "ceiling": 0.02175,
+    "alert_price": 0.02346,
+    "alert_time": "2026-09-06T21:31:02.598507+00:00",
+    "peak_price": 0.02346,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
