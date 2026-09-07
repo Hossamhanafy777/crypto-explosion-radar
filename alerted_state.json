@@ -618,6 +618,6 @@
     "alert_time": "2026-09-06T21:31:02.598507+00:00",
     "peak_price": 0.02346,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   }
 }
