@@ -619,5 +619,11 @@
     "peak_price": 0.02346,
     "weakness_alert_sent": false,
     "closed": true
+  },
+  "SENTUSDT:0.0144900000": {
+    "status": "pending",
+    "first_seen": "2026-09-08T20:45:43.635221+00:00",
+    "first_price": 0.01526,
+    "factor_score": 5
   }
 }
