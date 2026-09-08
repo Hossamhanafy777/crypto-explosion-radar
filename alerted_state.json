@@ -621,9 +621,13 @@
     "closed": true
   },
   "SENTUSDT:0.0144900000": {
-    "status": "pending",
-    "first_seen": "2026-09-08T20:45:43.635221+00:00",
-    "first_price": 0.01526,
-    "factor_score": 5
+    "status": "confirmed",
+    "symbol": "SENTUSDT",
+    "ceiling": 0.01449,
+    "alert_price": 0.01525,
+    "alert_time": "2026-09-08T21:15:46.343372+00:00",
+    "peak_price": 0.01525,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
