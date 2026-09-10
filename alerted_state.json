@@ -213,7 +213,7 @@
     "alert_time": "2026-08-20T06:46:07.543059+00:00",
     "peak_price": 0.0617,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "BIOUSDT:0.0287700000": {
     "status": "confirmed",
