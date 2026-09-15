@@ -293,7 +293,7 @@
     "alert_time": "2026-08-20T12:15:59.411724+00:00",
     "peak_price": 0.0105,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "VETUSDT:0.0050140000": {
     "status": "confirmed",
