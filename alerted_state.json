@@ -123,7 +123,7 @@
     "alert_time": "2026-08-19T17:45:21.162440+00:00",
     "peak_price": 81886.99,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "ZECUSDT:557.7700000000": {
     "status": "confirmed",
@@ -341,7 +341,7 @@
     "ceiling": 1.945,
     "alert_price": 1.977,
     "alert_time": "2026-08-20T16:45:39.488166+00:00",
-    "peak_price": 3.209,
+    "peak_price": 3.238,
     "weakness_alert_sent": false,
     "closed": false
   },
