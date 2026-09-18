@@ -93,7 +93,7 @@
     "alert_time": "2026-08-19T15:51:30.941220+00:00",
     "peak_price": 125.3,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "ETHUSDT:1981.2400000000": {
     "status": "confirmed",
@@ -103,7 +103,7 @@
     "alert_time": "2026-08-19T16:00:29.860273+00:00",
     "peak_price": 2626.45,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "SOLUSDT:78.8800000000": {
     "status": "confirmed",
@@ -113,7 +113,7 @@
     "alert_time": "2026-08-19T16:00:43.358985+00:00",
     "peak_price": 110.81,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "BTCUSDT:66956.1500000000": {
     "status": "confirmed",
