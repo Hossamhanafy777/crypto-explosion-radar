@@ -163,7 +163,7 @@
     "alert_time": "2026-08-19T21:56:15.212485+00:00",
     "peak_price": 0.3411,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "TRUMPUSDT:1.6700000000": {
     "status": "confirmed",
@@ -341,7 +341,7 @@
     "ceiling": 1.945,
     "alert_price": 1.977,
     "alert_time": "2026-08-20T16:45:39.488166+00:00",
-    "peak_price": 3.659,
+    "peak_price": 3.673,
     "weakness_alert_sent": false,
     "closed": false
   },
