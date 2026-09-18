@@ -153,7 +153,7 @@
     "alert_time": "2026-08-19T21:45:23.789550+00:00",
     "peak_price": 779.62,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "BNTUSDT:0.2906000000": {
     "status": "confirmed",
@@ -341,7 +341,7 @@
     "ceiling": 1.945,
     "alert_price": 1.977,
     "alert_time": "2026-08-20T16:45:39.488166+00:00",
-    "peak_price": 3.615,
+    "peak_price": 3.659,
     "weakness_alert_sent": false,
     "closed": false
   },
