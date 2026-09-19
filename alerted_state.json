@@ -631,9 +631,13 @@
     "closed": true
   },
   "SKLUSDT:0.0042400000": {
-    "status": "pending",
-    "first_seen": "2026-09-19T20:45:21.250131+00:00",
-    "first_price": 0.00466,
-    "factor_score": 4
+    "status": "confirmed",
+    "symbol": "SKLUSDT",
+    "ceiling": 0.00424,
+    "alert_price": 0.00447,
+    "alert_time": "2026-09-19T21:30:24.132577+00:00",
+    "peak_price": 0.00447,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
