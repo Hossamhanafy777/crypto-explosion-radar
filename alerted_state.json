@@ -283,7 +283,7 @@
     "alert_time": "2026-08-20T11:45:23.918053+00:00",
     "peak_price": 0.2245,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "PENGUUSDT:0.0069180000": {
     "status": "confirmed",
@@ -311,7 +311,7 @@
     "ceiling": 6.987,
     "alert_price": 7.041,
     "alert_time": "2026-08-20T15:45:36.006308+00:00",
-    "peak_price": 9.288,
+    "peak_price": 9.315,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -341,7 +341,7 @@
     "ceiling": 1.945,
     "alert_price": 1.977,
     "alert_time": "2026-08-20T16:45:39.488166+00:00",
-    "peak_price": 4.655,
+    "peak_price": 4.683,
     "weakness_alert_sent": false,
     "closed": false
   },
