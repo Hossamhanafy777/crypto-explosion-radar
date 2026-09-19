@@ -313,7 +313,7 @@
     "alert_time": "2026-08-20T15:45:36.006308+00:00",
     "peak_price": 9.454,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "SSVUSDT:2.4000000000": {
     "status": "confirmed",
