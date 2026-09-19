@@ -273,7 +273,7 @@
     "alert_time": "2026-08-20T11:15:54.744977+00:00",
     "peak_price": 0.1945,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "THETAUSDT:0.1478000000": {
     "status": "confirmed",
@@ -311,7 +311,7 @@
     "ceiling": 6.987,
     "alert_price": 7.041,
     "alert_time": "2026-08-20T15:45:36.006308+00:00",
-    "peak_price": 9.221,
+    "peak_price": 9.288,
     "weakness_alert_sent": false,
     "closed": false
   },
