@@ -433,7 +433,7 @@
     "alert_time": "2026-08-20T21:15:18.465751+00:00",
     "peak_price": 0.999,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "SANTOSUSDT:0.5240000000": {
     "status": "confirmed",
