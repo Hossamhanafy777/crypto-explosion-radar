@@ -593,7 +593,7 @@
     "alert_time": "2026-08-21T09:45:31.509577+00:00",
     "peak_price": 0.482,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "RUNEUSDT:0.4580000000": {
     "status": "pending",
