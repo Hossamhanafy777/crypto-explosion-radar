@@ -523,7 +523,7 @@
     "alert_time": "2026-08-21T07:15:47.327083+00:00",
     "peak_price": 0.12791,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "AAVEUSDT:102.5400000000": {
     "status": "confirmed",
