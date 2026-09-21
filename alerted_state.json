@@ -651,9 +651,13 @@
     "closed": false
   },
   "ARKMUSDT:0.1197000000": {
-    "status": "pending",
-    "first_seen": "2026-09-21T13:15:32.130628+00:00",
-    "first_price": 0.1313,
-    "factor_score": 4
+    "status": "confirmed",
+    "symbol": "ARKMUSDT",
+    "ceiling": 0.1197,
+    "alert_price": 0.1291,
+    "alert_time": "2026-09-21T13:45:38.345176+00:00",
+    "peak_price": 0.1291,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
