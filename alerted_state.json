@@ -641,9 +641,13 @@
     "closed": true
   },
   "SEIUSDT:0.0517000000": {
-    "status": "pending",
-    "first_seen": "2026-09-21T00:25:46.410856+00:00",
-    "first_price": 0.05478,
-    "factor_score": 4
+    "status": "confirmed",
+    "symbol": "SEIUSDT",
+    "ceiling": 0.0517,
+    "alert_price": 0.05478,
+    "alert_time": "2026-09-21T01:00:46.548887+00:00",
+    "peak_price": 0.05478,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
