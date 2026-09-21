@@ -639,5 +639,11 @@
     "peak_price": 0.00533,
     "weakness_alert_sent": true,
     "closed": true
+  },
+  "SEIUSDT:0.0517000000": {
+    "status": "pending",
+    "first_seen": "2026-09-21T00:25:46.410856+00:00",
+    "first_price": 0.05478,
+    "factor_score": 4
   }
 }
