@@ -700,10 +700,10 @@
     "weakness_alert_sent": false,
     "closed": false
   },
-  "DOLOUSDT:0.0292200000": {
+  "APEUSDT:0.1514000000": {
     "status": "pending",
-    "first_seen": "2026-09-22T16:15:57.718789+00:00",
-    "first_price": 0.03131,
+    "first_seen": "2026-09-22T17:30:44.773046+00:00",
+    "first_price": 0.1602,
     "factor_score": 4
   }
 }
