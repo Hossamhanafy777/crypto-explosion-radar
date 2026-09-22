@@ -701,9 +701,13 @@
     "closed": false
   },
   "APEUSDT:0.1514000000": {
-    "status": "pending",
-    "first_seen": "2026-09-22T17:30:44.773046+00:00",
-    "first_price": 0.1602,
-    "factor_score": 4
+    "status": "confirmed",
+    "symbol": "APEUSDT",
+    "ceiling": 0.1514,
+    "alert_price": 0.1601,
+    "alert_time": "2026-09-22T18:15:38.471770+00:00",
+    "peak_price": 0.1603,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
