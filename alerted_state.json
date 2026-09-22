@@ -679,5 +679,11 @@
     "peak_price": 0.0275,
     "weakness_alert_sent": false,
     "closed": false
+  },
+  "NXPCUSDT:0.2356000000": {
+    "status": "pending",
+    "first_seen": "2026-09-22T06:15:50.749666+00:00",
+    "first_price": 0.2474,
+    "factor_score": 4
   }
 }
