@@ -656,14 +656,18 @@
     "ceiling": 0.1197,
     "alert_price": 0.1291,
     "alert_time": "2026-09-21T13:45:38.345176+00:00",
-    "peak_price": 0.1291,
+    "peak_price": 0.1292,
     "weakness_alert_sent": false,
     "closed": false
   },
   "NXPCUSDT:0.2349000000": {
-    "status": "pending",
-    "first_seen": "2026-09-22T00:00:53.643377+00:00",
-    "first_price": 0.2615,
-    "factor_score": 4
+    "status": "confirmed",
+    "symbol": "NXPCUSDT",
+    "ceiling": 0.2349,
+    "alert_price": 0.2507,
+    "alert_time": "2026-09-22T00:45:49.846216+00:00",
+    "peak_price": 0.2507,
+    "weakness_alert_sent": false,
+    "closed": false
   }
 }
