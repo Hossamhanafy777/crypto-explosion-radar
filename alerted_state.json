@@ -689,5 +689,11 @@
     "peak_price": 0.25,
     "weakness_alert_sent": false,
     "closed": false
+  },
+  "CHRUSDT:0.0180000000": {
+    "status": "pending",
+    "first_seen": "2026-09-22T15:15:31.147848+00:00",
+    "first_price": 0.01897,
+    "factor_score": 4
   }
 }
