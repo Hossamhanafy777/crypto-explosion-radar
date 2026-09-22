@@ -676,7 +676,7 @@
     "ceiling": 0.0259,
     "alert_price": 0.0274,
     "alert_time": "2026-09-22T03:46:17.870580+00:00",
-    "peak_price": 0.0275,
+    "peak_price": 0.0276,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -696,8 +696,14 @@
     "ceiling": 0.018,
     "alert_price": 0.02063,
     "alert_time": "2026-09-22T16:00:40.347159+00:00",
-    "peak_price": 0.02063,
+    "peak_price": 0.02467,
     "weakness_alert_sent": false,
     "closed": false
+  },
+  "DOLOUSDT:0.0292200000": {
+    "status": "pending",
+    "first_seen": "2026-09-22T16:15:57.718789+00:00",
+    "first_price": 0.03131,
+    "factor_score": 4
   }
 }
