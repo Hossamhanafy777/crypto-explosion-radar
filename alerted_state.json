@@ -706,7 +706,7 @@
     "ceiling": 0.1514,
     "alert_price": 0.1601,
     "alert_time": "2026-09-22T18:15:38.471770+00:00",
-    "peak_price": 0.1611,
+    "peak_price": 0.1619,
     "weakness_alert_sent": false,
     "closed": false
   },
@@ -715,5 +715,11 @@
     "first_seen": "2026-09-23T00:01:00.763277+00:00",
     "first_price": 0.03072,
     "factor_score": 4
+  },
+  "BELUSDT:0.1268000000": {
+    "status": "pending",
+    "first_seen": "2026-09-23T03:30:24.769515+00:00",
+    "first_price": 0.1339,
+    "factor_score": 5
   }
 }
