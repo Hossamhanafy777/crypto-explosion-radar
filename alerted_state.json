@@ -708,7 +708,7 @@
     "alert_time": "2026-09-22T18:15:38.471770+00:00",
     "peak_price": 0.1649,
     "weakness_alert_sent": false,
-    "closed": false
+    "closed": true
   },
   "DOLOUSDT:0.0292200000": {
     "status": "pending",
