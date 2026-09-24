@@ -725,5 +725,11 @@
     "peak_price": 0.137,
     "weakness_alert_sent": false,
     "closed": true
+  },
+  "NOMUSDT:0.0021420000": {
+    "status": "pending",
+    "first_seen": "2026-09-24T05:30:49.529617+00:00",
+    "first_price": 0.002358,
+    "factor_score": 5
   }
 }
